@@ -332,6 +332,23 @@ nav {
   border-radius: 6px;
   text-transform: uppercase;
 }
+.chat-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--green), var(--green-dark));
+  color: white;
+  text-decoration: none;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  width: 100%;
+}
+.chat-btn:hover { background: linear-gradient(135deg, var(--green-dark), #004d30); }
 .tool-video {
   position: relative;
   padding-bottom: 56.25%;
@@ -573,6 +590,7 @@ footer {
     <div id="tool-chatgpt" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">🤖</span><h4>ChatGPT</h4><span class="free">Gratis</span></div>
+        <a href="https://chat.openai.com" target="_blank" class="chat-btn">💬 Habla con ChatGPT</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/8dfOAzaGREQ" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Tutorial completo en español: cómo usar ChatGPT para crear planeaciones, actividades, evaluaciones y más. Ideal para docentes principiantes.</p>
@@ -587,6 +605,7 @@ footer {
     <div id="tool-claude" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">🧠</span><h4>Claude (Anthropic)</h4><span class="free">Gratis</span></div>
+        <a href="https://claude.ai" target="_blank" class="chat-btn">💬 Habla con Claude</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/CmmLH307Dow" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Aprende paso a paso cómo usar Claude AI. Excelente para redactar planeaciones detalladas, crear letras de canciones educativas y generar documentos largos con lenguaje natural.</p>
@@ -601,6 +620,7 @@ footer {
     <div id="tool-gemini" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">🌀</span><h4>Gemini (Google)</h4><span class="free">Gratis</span></div>
+        <a href="https://gemini.google.com" target="_blank" class="chat-btn">💬 Habla con Gemini</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/71a1BnP6h3c" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Conoce Gemini, la IA de Google. Perfecta para crear materiales educativos, integrar con Google Classroom y usar la Gema personalizada que creamos para docentes colombianos.</p>
@@ -615,6 +635,7 @@ footer {
     <div id="tool-deepseek" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">🔍</span><h4>Deepseek</h4><span class="free">Gratis</span></div>
+        <a href="https://chat.deepseek.com" target="_blank" class="chat-btn">💬 Habla con Deepseek</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/UAuMVP8NeyA" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Deepseek es una IA gratuita con excelente razonamiento. Ideal para crear PIAR, documentos normativos y tareas que requieren precisión y estructura lógica.</p>
@@ -629,6 +650,7 @@ footer {
     <div id="tool-copilot" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">💻</span><h4>Microsoft Copilot</h4><span class="free">Gratis</span></div>
+        <a href="https://copilot.microsoft.com" target="_blank" class="chat-btn">💬 Habla con Copilot</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/d-CuF6dlqLg" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Copilot viene integrado con Office 365 (Word, Excel, PowerPoint). Muchos colegios públicos ya tienen acceso. Ideal para crear documentos, presentaciones y análisis de datos educativos.</p>
@@ -643,6 +665,7 @@ footer {
     <div id="tool-notebooklm" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">📓</span><h4>NotebookLM (Google)</h4><span class="free">Gratis</span></div>
+        <a href="https://notebooklm.google.com" target="_blank" class="chat-btn">💬 Abre NotebookLM</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/6zM77qiNxLc" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">NotebookLM es un cuaderno de investigación con IA. Sube documentos, PDFs, videos y la IA los analiza, resume y genera podcasts educativos automáticamente.</p>
@@ -657,6 +680,7 @@ footer {
     <div id="tool-perplexity" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">🔎</span><h4>Perplexity AI</h4><span class="free">Gratis</span></div>
+        <a href="https://www.perplexity.ai" target="_blank" class="chat-btn">💬 Busca con Perplexity</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/SpUHNrxGyso" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Perplexity es un buscador inteligente que te da respuestas con fuentes verificadas. Perfecto para preparar clases con información actualizada y confiable.</p>
@@ -671,6 +695,7 @@ footer {
     <div id="tool-canva" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">🎨</span><h4>Canva + IA</h4><span class="free">Gratis</span></div>
+        <a href="https://www.canva.com" target="_blank" class="chat-btn">🎨 Abre Canva</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/UkzVLHeSf7c" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Canva ahora tiene Magic Studio con inteligencia artificial. Crea infografías, fichas, carteles y presentaciones en segundos. Ideal para diseñar materiales visuales para tu clase.</p>
@@ -685,6 +710,7 @@ footer {
     <div id="tool-gamma" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">📊</span><h4>Gamma AI</h4><span class="free">Gratis</span></div>
+        <a href="https://gamma.app" target="_blank" class="chat-btn">📊 Abre Gamma</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/sHkrkt-a_vE" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Gamma crea presentaciones impactantes con solo escribir el tema. Ideal para preparar clases visuales, presentaciones para reuniones de padres y materiales para tus estudiantes.</p>
@@ -699,6 +725,7 @@ footer {
     <div id="tool-suno" class="tool-grid" style="display:none">
       <div class="tool-card">
         <div class="tool-top"><span class="emoji">🎵</span><h4>Suno AI</h4><span class="free">Gratis</span></div>
+        <a href="https://suno.ai" target="_blank" class="chat-btn">🎵 Abre Suno AI</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/t5YhwEA_rHI" allowfullscreen loading="lazy"></iframe></div>
         <div class="tool-info">
           <p class="desc">Suno AI genera canciones completas con letra y música a partir de texto. Crea canciones educativas sobre cualquier tema para tus clases. ¡A los niños les encanta!</p>
@@ -718,15 +745,15 @@ footer {
   <div class="authors-grid">
     <div class="author-card">
       <div class="name">Maritza Jiménez Saldarriaga</div>
-      <div class="role">Investigadora · Maestrante UTB</div>
+      <div class="role">Maestrante UTB</div>
     </div>
     <div class="author-card">
       <div class="name">Betty Esperanza Lagos Quintero</div>
-      <div class="role">Investigadora · Maestrante UTB</div>
+      <div class="role">Maestrante UTB</div>
     </div>
     <div class="author-card">
       <div class="name">Yessica Paola Márquez Núñez</div>
-      <div class="role">Investigadora · Maestrante UTB</div>
+      <div class="role">Maestrante UTB</div>
     </div>
   </div>
   <p style="margin-top:30px; opacity:0.75; font-size:14px; max-width:600px; margin-left:auto; margin-right:auto;">
