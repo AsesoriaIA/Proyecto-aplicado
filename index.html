@@ -416,12 +416,33 @@ footer {
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-  nav { padding: 0 16px; }
+  nav { padding: 0 12px; height: 60px; }
+  .nav-brand { font-size: 15px; }
   .nav-links a { display: none; }
-  .hero { padding: 100px 16px 60px; }
-  .cards-grid { grid-template-columns: 1fr; }
+  .hero { padding: 90px 16px 50px; }
+  .hero h1 { font-size: 24px; }
+  .hero p { font-size: 14px; }
+  .cards-grid { grid-template-columns: 1fr; padding: 0 12px 40px; gap: 16px; }
   .tool-grid { grid-template-columns: 1fr; }
+  .tool-container { padding: 20px 14px; }
   .authors-grid { flex-direction: column; align-items: center; }
+  .author-card { min-width: 100%; }
+  .gem-btn { font-size: 14px; padding: 12px 24px; width: 100%; max-width: 340px; justify-content: center; }
+  .dropdown-content { right: -60px; min-width: 280px; }
+  .card-header { padding: 20px 18px 14px; }
+  .card-body { padding: 0 18px 18px; }
+  .card-footer { padding: 10px 18px; font-size: 12px; }
+  .section-title { padding: 40px 16px 10px; font-size: 22px; }
+  .about { padding: 40px 16px; }
+  .about p { font-size: 14px; }
+  .tool-info .prompt-box { font-size: 11px; max-height: 120px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 20px; }
+  .dropbtn { font-size: 12px; padding: 8px 14px; }
+  .dropdown-content { min-width: 240px; right: -80px; }
+  .tool-card .tool-top h4 { font-size: 14px; }
+  .tool-card .tool-top .emoji { font-size: 22px; }
 }
 
 /* === SCROLL ANIMATIONS === */
@@ -696,16 +717,16 @@ footer {
   <h3>👩‍🏫 Equipo de investigación</h3>
   <div class="authors-grid">
     <div class="author-card">
-      <div class="name">Maritza Jiménez</div>
-      <div class="role">Docente 2° Primaria · Maestrante UTB</div>
+      <div class="name">Maritza Jiménez Saldarriaga</div>
+      <div class="role">Investigadora · Maestrante UTB</div>
     </div>
     <div class="author-card">
-      <div class="name">Betty Lagos</div>
-      <div class="role">Co-investigadora · Maestrante UTB</div>
+      <div class="name">Betty Esperanza Lagos Quintero</div>
+      <div class="role">Investigadora · Maestrante UTB</div>
     </div>
     <div class="author-card">
-      <div class="name">Yessica Márquez</div>
-      <div class="role">Co-investigadora · Maestrante UTB</div>
+      <div class="name">Yessica Paola Márquez Núñez</div>
+      <div class="role">Investigadora · Maestrante UTB</div>
     </div>
   </div>
   <p style="margin-top:30px; opacity:0.75; font-size:14px; max-width:600px; margin-left:auto; margin-right:auto;">
