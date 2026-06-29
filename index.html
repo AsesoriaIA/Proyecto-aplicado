@@ -394,6 +394,22 @@ nav {
 }
 .tool-info .ref a { color: var(--blue); text-decoration: none; }
 .tool-info .ref a:hover { text-decoration: underline; }
+.go-chat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: white;
+  border: 1.5px solid var(--green);
+  border-radius: 8px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.go-chat:hover { background: var(--green); color: white; }
 
 /* === AUTHORS === */
 .authors {
@@ -597,6 +613,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">"Eres un docente experto en DUA. Diseña una planeación de clase para grado 2°, área Matemáticas, tema 'Sumas con llevadas', duración 2 horas. Incluye: propósito, momentos de clase con tiempos, adaptaciones para estudiantes con NEE, y una rúbrica de evaluación."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=8dfOAzaGREQ" target="_blank">Andrés Villalba · Guía ChatGPT para Docentes</a></div>
+          <a href="https://chat.openai.com" target="_blank" class="go-chat">🚀 Ir a ChatGPT</a>
         </div>
       </div>
     </div>
@@ -612,6 +629,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">"Eres un compositor de canciones infantiles. Escribe una canción sobre la fotosíntesis para grado 3°, estilo cumbia colombiana, con estribillo pegajoso. Incluye referencias a la región Caribe."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=CmmLH307Dow" target="_blank">Facundo Corengia · Tutorial Claude AI</a></div>
+          <a href="https://claude.ai" target="_blank" class="go-chat">🚀 Ir a Claude</a>
         </div>
       </div>
     </div>
@@ -627,6 +645,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">"Crea una ficha de actividad imprimible para grado 2°, área Ciencias Naturales, tema 'Los animales de la región Caribe'. Versión: BLANCO Y NEGRO (para colorear). Incluye instrucciones, actividad principal y auto-evaluación con caritas."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=71a1BnP6h3c" target="_blank">Curso Prompt Engineering · YouTube</a></div>
+          <a href="https://gemini.google.com" target="_blank" class="go-chat">🚀 Ir a Gemini</a>
         </div>
       </div>
     </div>
@@ -642,6 +661,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">"Redacta un PIAR completo según Decreto 1421 de 2017 para un estudiante de grado 3° con diagnóstico de TDAH. Fortalezas: creatividad, expresión oral. Barreras: atención sostenida, lectoescritura. Incluye ajustes por área, recursos y acta de acuerdo."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=UAuMVP8NeyA" target="_blank">Guía Deepseek para principiantes</a></div>
+          <a href="https://chat.deepseek.com" target="_blank" class="go-chat">🚀 Ir a Deepseek</a>
         </div>
       </div>
     </div>
@@ -657,6 +677,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">"Crea una presentación de 5 diapositivas sobre el ciclo del agua para grado 2°. Incluye: definición, etapas (con dibujos sugeridos), dato curioso y una actividad práctica para el aula."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=d-CuF6dlqLg" target="_blank">Microsoft Copilot Tutorial</a></div>
+          <a href="https://copilot.microsoft.com" target="_blank" class="go-chat">🚀 Ir a Copilot</a>
         </div>
       </div>
     </div>
@@ -672,6 +693,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">Sube el PDF de los DBA del MEN a NotebookLM y pregúntale: "Resume los DBA de Ciencias Naturales para grado 2° y sugiere 3 actividades prácticas para cada uno, con materiales que se consiguen en cualquier colegio público."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=6zM77qiNxLc" target="_blank">Tutorial NotebookLM · YouTube</a></div>
+          <a href="https://notebooklm.google.com" target="_blank" class="go-chat">🚀 Ir a NotebookLM</a>
         </div>
       </div>
     </div>
@@ -687,6 +709,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">"¿Cuáles son las mejores estrategias para enseñar fracciones en grado 3° de primaria? Dame 5 actividades concretas con materiales accesibles para colegios públicos colombianos. Incluye fuentes."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=SpUHNrxGyso" target="_blank">Tutorial Perplexity AI Español</a></div>
+          <a href="https://www.perplexity.ai" target="_blank" class="go-chat">🚀 Ir a Perplexity</a>
         </div>
       </div>
     </div>
@@ -702,6 +725,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">Usa el prompt del Módulo 4 (Infografías) de la GEM, pégalo en ChatGPT y luego lleva la descripción a Canva. O directamente en Canva: "Infografía educativa sobre el sistema solar para grado 2°, tonos azules, con dibujos grandes y texto mínimo."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=UkzVLHeSf7c" target="_blank">Tutorial Completo Canva 2024</a></div>
+          <a href="https://www.canva.com" target="_blank" class="go-chat">🎨 Ir a Canva</a>
         </div>
       </div>
     </div>
@@ -717,6 +741,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">"Crea una presentación sobre 'La Independencia de Colombia' para grado 4°. 8 diapositivas, estilo visual, incluye fechas clave, personajes principales y una línea de tiempo. Tono: educativo, para niños de primaria."</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=sHkrkt-a_vE" target="_blank">Tutorial Gamma AI · YouTube</a></div>
+          <a href="https://gamma.app" target="_blank" class="go-chat">📊 Ir a Gamma</a>
         </div>
       </div>
     </div>
@@ -732,6 +757,7 @@ footer {
           <div class="prompt-label">📋 Prompt recomendado</div>
           <div class="prompt-box">Paso 1: Pide a ChatGPT la letra. Paso 2: Pega en Suno AI. Ejemplo de letra: Canción infantil estilo vallenato sobre las tablas de multiplicar del 2 para grado 2°. Estribillo: "Dos por uno es dos, dos por dos es cuatro, ¡multiplicar es fácil, solo practico un rato!"</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=t5YhwEA_rHI" target="_blank">Tutorial Suno AI · YouTube</a></div>
+          <a href="https://suno.ai" target="_blank" class="go-chat">🎵 Ir a Suno AI</a>
         </div>
       </div>
     </div>
