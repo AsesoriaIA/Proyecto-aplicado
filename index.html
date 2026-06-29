@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asesoría Docente con IA</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+<style>
+:root {
+  --green: #028C5C;
+  --green-light: #e8f5ee;
+  --green-dark: #006b45;
+  --blue: #093AD8;
+  --blue-light: #e8edfe;
+  --blue-dark: #052a9e;
+  --navy: #213460;
+  --navy-dark: #0f1f3a;
+  --cyan: #0FC5EF;
+  --gold: #EFB000;
+  --gold-light: #fff3d6;
+  --dark: #1a1a2e;
+  --gray: #f5f7fa;
+  --gray-dark: #64748b;
+  --shadow: 0 4px 20px rgba(0,0,0,0.08);
+  --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--gray);
+  color: var(--dark);
+  line-height: 1.6;
+}
+/* === NAV === */
+nav {
+  background: white;
+  padding: 0 24px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--green);
+}
+.nav-brand span { background: var(--green); color: white; padding: 4px 10px; border-radius: 8px; }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green); }
+
+/* === DROPDOWN CATEGORÍAS === */
+.dropdown { position: relative; display: inline-block; }
+.dropbtn {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dropbtn:hover { background: var(--green-dark); transform: translateY(-1px); }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: white;
+  min-width: 320px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-hover);
+  z-index: 10;
+  padding: 8px;
+}
+.dropdown:hover .dropdown-content { display: block; }
+.dropdown-content .cat-header {
+  padding: 8px 12px;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gray-dark);
+}
+.dropdown-content a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: var(--navy);
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.dropdown-content a:hover { background: var(--green-light); color: var(--green); }
+.dropdown-content .cat-divider { border-top: 1px solid #eee; margin: 4px 0; }
+
+/* === HERO === */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 50%, var(--green-dark) 100%);
+  color: white;
+  padding: 120px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle at 30% 50%, rgba(15,197,239,0.08) 0%, transparent 50%),
+              radial-gradient(circle at 70% 50%, rgba(2,140,92,0.08) 0%, transparent 50%);
+}
+.hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; position: relative; }
+.hero h1 span { color: var(--cyan); }
+.hero p {
+  font-size: clamp(15px, 2vw, 19px);
+  max-width: 720px;
+  margin: 16px auto 0;
+  opacity: 0.9;
+  position: relative;
+  line-height: 1.7;
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* === BOTÓN GEMA === */
+.gem-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--green), #00a870);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 24px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(2,140,92,0.3);
+  position: relative;
+}
+.gem-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(2,140,92,0.4);
+}
+.gem-btn::after {
+  content: '✨';
+  animation: sparkle 1.5s infinite;
+}
+@keyframes sparkle {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* === CONTENEDOR === */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* === ABOUT === */
+.about {
+  background: white;
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 1px solid #e2e8f0;
+}
+.about h2 {
+  font-size: 26px;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.about p {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--gray-dark);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+/* === CATEGORÍAS === */
+.section-title {
+  text-align: center;
+  padding: 60px 20px 10px;
+  font-size: 28px;
+  color: var(--navy);
+}
+.section-sub {
+  text-align: center;
+  color: var(--gray-dark);
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 0 20px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.card {
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.card:hover { box-shadow: var(--shadow-hover); transform: translateY(-4px); }
+.card-header {
+  padding: 28px 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.card-header .icon {
+  width: 50px; height: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+.card-header .icon.plan { background: #e8f5ee; }
+.card-header .icon.invest { background: #e8edfe; }
+.card-header .icon.design { background: #fff3d6; }
+.card-header h3 { font-size: 18px; color: var(--navy); }
+.card-header .count {
+  font-size: 12px;
+  color: var(--gray-dark);
+  background: var(--gray);
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+.card-body { padding: 0 24px 24px; }
+.card-body p { font-size: 14px; color: var(--gray-dark); line-height: 1.6; }
+.card-footer {
+  padding: 12px 24px;
+  background: #f8fafc;
+  font-size: 13px;
+  color: var(--green);
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* === TOOL MODAL / EXPANDED VIEW === */
+.tool-section { display: none; }
+.tool-section.active { display: block; }
+.tool-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: all 0.2s;
+  color: var(--navy);
+  font-weight: 500;
+}
+.back-btn:hover { border-color: var(--green); color: var(--green); }
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.tool-card {
+  background: white;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.tool-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.tool-top {
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.tool-top .emoji { font-size: 28px; }
+.tool-top h4 { font-size: 16px; color: var(--navy); }
+.tool-top .free {
+  margin-left: auto;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.tool-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  background: #000;
+}
+.tool-video iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+.tool-info { padding: 16px 18px; }
+.tool-info .desc { font-size: 13px; color: var(--gray-dark); margin-bottom: 12px; }
+.tool-info .prompt-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--green);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.tool-info .prompt-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #334155;
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+}
+.tool-info .prompt-box::-webkit-scrollbar { width: 4px; }
+.tool-info .prompt-box::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+.tool-info .ref {
+  font-size: 11px;
+  color: #94a3b8;
+  font-style: italic;
+}
+.tool-info .ref a { color: var(--blue); text-decoration: none; }
+.tool-info .ref a:hover { text-decoration: underline; }
+
+/* === AUTHORS === */
+.authors {
+  background: var(--navy);
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+.authors h3 { font-size: 22px; margin-bottom: 24px; }
+.authors-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.author-card {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-sm);
+  padding: 20px 28px;
+  min-width: 200px;
+  backdrop-filter: blur(8px);
+}
+.author-card .name { font-weight: 700; font-size: 16px; }
+.author-card .role { font-size: 13px; opacity: 0.75; margin-top: 4px; }
+
+/* === FOOTER === */
+footer {
+  background: var(--navy-dark);
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 24px;
+  font-size: 13px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  nav { padding: 0 16px; }
+  .nav-links a { display: none; }
+  .hero { padding: 100px 16px 60px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .tool-grid { grid-template-columns: 1fr; }
+  .authors-grid { flex-direction: column; align-items: center; }
+}
+
+/* === SCROLL ANIMATIONS === */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="nav-brand">
+    <span>GEM</span> Asesoría Docente
+  </div>
+  <div class="nav-links">
+    <a href="#" onclick="showDashboard()">Inicio</a>
+    <div class="dropdown">
+      <button class="dropbtn">☰ Herramientas</button>
+      <div class="dropdown-content">
+        <div class="cat-header">📝 Para planear y crear</div>
+        <a href="#" onclick="showTools('chatgpt')">🤖 ChatGPT</a>
+        <a href="#" onclick="showTools('claude')">🧠 Claude</a>
+        <a href="#" onclick="showTools('gemini')">🌀 Gemini</a>
+        <a href="#" onclick="showTools('deepseek')">🔍 Deepseek</a>
+        <a href="#" onclick="showTools('copilot')">💻 Copilot</a>
+        <div class="cat-divider"></div>
+        <div class="cat-header">🔎 Para investigar</div>
+        <a href="#" onclick="showTools('notebooklm')">📓 NotebookLM</a>
+        <a href="#" onclick="showTools('perplexity')">🔎 Perplexity</a>
+        <div class="cat-divider"></div>
+        <div class="cat-header">🎨 Para diseñar</div>
+        <a href="#" onclick="showTools('canva')">🎨 Canva IA</a>
+        <a href="#" onclick="showTools('gamma')">📊 Gamma</a>
+        <a href="#" onclick="showTools('suno')">🎵 Suno AI</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-badge">🧪 Proyecto Aplicado · Maestría UTB</div>
+  <h1>Asesoría Docente <span>con IA</span></h1>
+  <p>Un espacio diseñado para que los docentes de colegios públicos encuentren herramientas, tutoriales, prompts y recursos de inteligencia artificial que faciliten su planeación de clase, atención a la diversidad y trabajo diario.</p>
+  <a class="gem-btn" href="https://gemini.google.com/gem/1ilyb7PcKftUNfrHRb6YsJ1uSHwT0l_B_?usp=sharing" target="_blank">🤖 Accede a nuestra Gema en Gemini</a>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about">
+  <div class="container">
+    <h2>¿Qué es este sitio?</h2>
+    <p>Somos un equipo de docentes-investigadores de la <strong>Universidad Tecnológica de Bolívar</strong> que creamos este espacio para reunir, en un solo lugar, las mejores herramientas de inteligencia artificial aplicadas a la labor docente. Aquí encontrarás <strong>tutoriales claros</strong>, <strong>prompts listos para usar</strong> y una <strong>Gema de Gemini</strong> personalizada que te ayudará a planear tus clases con enfoque inclusivo (DUA), crear fichas, canciones, infografías, evaluaciones y PIAR. Todo pensado para docentes que no son expertos en tecnología. 💚</p>
+  </div>
+</section>
+
+<!-- ===== DASHBOARD - CATEGORÍAS ===== -->
+<section id="dashboard">
+  <h2 class="section-title fade-in">Explora las herramientas</h2>
+  <p class="section-sub fade-in">Selecciona una categoría y descubre tutoriales, prompts y recursos para cada IA</p>
+
+  <div class="cards-grid">
+    <!-- Card 1 -->
+    <div class="card fade-in" onclick="showCategory('plan')">
+      <div class="card-header">
+        <div class="icon plan">📝</div>
+        <div>
+          <h3>Para planear y crear</h3>
+          <div class="count">5 herramientas</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>ChatGPT, Claude, Gemini, Deepseek y Copilot. Ideales para crear planeaciones, fichas, evaluaciones, PIAR y todo el material que necesitas para tu clase.</p>
+      </div>
+      <div class="card-footer">
+        <span>🤖 ChatGPT · Claude · Gemini · Deepseek · Copilot</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card fade-in" onclick="showCategory('invest')">
+      <div class="card-header">
+        <div class="icon invest">🔍</div>
+        <div>
+          <h3>Para investigar</h3>
+          <div class="count">2 herramientas</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>NotebookLM y Perplexity. Perfectas para buscar información con fuentes verificadas, resumir documentos, crear podcasts educativos y preparar tus clases con datos confiables.</p>
+      </div>
+      <div class="card-footer">
+        <span>📓 NotebookLM · 🔎 Perplexity</span>
+        <span>→</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card fade-in" onclick="showCategory('design')">
+      <div class="card-header">
+        <div class="icon design">🎨</div>
+        <div>
+          <h3>Para diseñar</h3>
+          <div class="count">3 herramientas</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Canva IA, Gamma y Suno AI. Crea infografías, presentaciones impactantes y canciones educativas originales para tus estudiantes de primaria.</p>
+      </div>
+      <div class="card-footer">
+        <span>🎨 Canva IA · 📊 Gamma · 🎵 Suno AI</span>
+        <span>→</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOLS VIEW (hidden by default) ===== -->
+<section id="tools-view" class="tool-section">
+  <div class="tool-container">
+    <button class="back-btn" onclick="showDashboard()">← Volver al inicio</button>
+
+    <!-- ChatGPT -->
+    <div id="tool-chatgpt" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🤖</span><h4>ChatGPT</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/8dfOAzaGREQ" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Tutorial completo en español: cómo usar ChatGPT para crear planeaciones, actividades, evaluaciones y más. Ideal para docentes principiantes.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">"Eres un docente experto en DUA. Diseña una planeación de clase para grado 2°, área Matemáticas, tema 'Sumas con llevadas', duración 2 horas. Incluye: propósito, momentos de clase con tiempos, adaptaciones para estudiantes con NEE, y una rúbrica de evaluación."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=8dfOAzaGREQ" target="_blank">Andrés Villalba · Guía ChatGPT para Docentes</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Claude -->
+    <div id="tool-claude" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🧠</span><h4>Claude (Anthropic)</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/CmmLH307Dow" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Aprende paso a paso cómo usar Claude AI. Excelente para redactar planeaciones detalladas, crear letras de canciones educativas y generar documentos largos con lenguaje natural.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">"Eres un compositor de canciones infantiles. Escribe una canción sobre la fotosíntesis para grado 3°, estilo cumbia colombiana, con estribillo pegajoso. Incluye referencias a la región Caribe."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=CmmLH307Dow" target="_blank">Facundo Corengia · Tutorial Claude AI</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gemini -->
+    <div id="tool-gemini" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🌀</span><h4>Gemini (Google)</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/71a1BnP6h3c" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Conoce Gemini, la IA de Google. Perfecta para crear materiales educativos, integrar con Google Classroom y usar la Gema personalizada que creamos para docentes colombianos.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">"Crea una ficha de actividad imprimible para grado 2°, área Ciencias Naturales, tema 'Los animales de la región Caribe'. Versión: BLANCO Y NEGRO (para colorear). Incluye instrucciones, actividad principal y auto-evaluación con caritas."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=71a1BnP6h3c" target="_blank">Curso Prompt Engineering · YouTube</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Deepseek -->
+    <div id="tool-deepseek" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🔍</span><h4>Deepseek</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/UAuMVP8NeyA" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Deepseek es una IA gratuita con excelente razonamiento. Ideal para crear PIAR, documentos normativos y tareas que requieren precisión y estructura lógica.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">"Redacta un PIAR completo según Decreto 1421 de 2017 para un estudiante de grado 3° con diagnóstico de TDAH. Fortalezas: creatividad, expresión oral. Barreras: atención sostenida, lectoescritura. Incluye ajustes por área, recursos y acta de acuerdo."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=UAuMVP8NeyA" target="_blank">Guía Deepseek para principiantes</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copilot -->
+    <div id="tool-copilot" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">💻</span><h4>Microsoft Copilot</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/d-CuF6dlqLg" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Copilot viene integrado con Office 365 (Word, Excel, PowerPoint). Muchos colegios públicos ya tienen acceso. Ideal para crear documentos, presentaciones y análisis de datos educativos.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">"Crea una presentación de 5 diapositivas sobre el ciclo del agua para grado 2°. Incluye: definición, etapas (con dibujos sugeridos), dato curioso y una actividad práctica para el aula."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=d-CuF6dlqLg" target="_blank">Microsoft Copilot Tutorial</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NotebookLM -->
+    <div id="tool-notebooklm" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📓</span><h4>NotebookLM (Google)</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/6zM77qiNxLc" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">NotebookLM es un cuaderno de investigación con IA. Sube documentos, PDFs, videos y la IA los analiza, resume y genera podcasts educativos automáticamente.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">Sube el PDF de los DBA del MEN a NotebookLM y pregúntale: "Resume los DBA de Ciencias Naturales para grado 2° y sugiere 3 actividades prácticas para cada uno, con materiales que se consiguen en cualquier colegio público."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=6zM77qiNxLc" target="_blank">Tutorial NotebookLM · YouTube</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Perplexity -->
+    <div id="tool-perplexity" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🔎</span><h4>Perplexity AI</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/SpUHNrxGyso" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Perplexity es un buscador inteligente que te da respuestas con fuentes verificadas. Perfecto para preparar clases con información actualizada y confiable.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">"¿Cuáles son las mejores estrategias para enseñar fracciones en grado 3° de primaria? Dame 5 actividades concretas con materiales accesibles para colegios públicos colombianos. Incluye fuentes."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=SpUHNrxGyso" target="_blank">Tutorial Perplexity AI Español</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canva IA -->
+    <div id="tool-canva" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🎨</span><h4>Canva + IA</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/UkzVLHeSf7c" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Canva ahora tiene Magic Studio con inteligencia artificial. Crea infografías, fichas, carteles y presentaciones en segundos. Ideal para diseñar materiales visuales para tu clase.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">Usa el prompt del Módulo 4 (Infografías) de la GEM, pégalo en ChatGPT y luego lleva la descripción a Canva. O directamente en Canva: "Infografía educativa sobre el sistema solar para grado 2°, tonos azules, con dibujos grandes y texto mínimo."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=UkzVLHeSf7c" target="_blank">Tutorial Completo Canva 2024</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gamma -->
+    <div id="tool-gamma" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📊</span><h4>Gamma AI</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/sHkrkt-a_vE" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Gamma crea presentaciones impactantes con solo escribir el tema. Ideal para preparar clases visuales, presentaciones para reuniones de padres y materiales para tus estudiantes.</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">"Crea una presentación sobre 'La Independencia de Colombia' para grado 4°. 8 diapositivas, estilo visual, incluye fechas clave, personajes principales y una línea de tiempo. Tono: educativo, para niños de primaria."</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=sHkrkt-a_vE" target="_blank">Tutorial Gamma AI · YouTube</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suno AI -->
+    <div id="tool-suno" class="tool-grid" style="display:none">
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🎵</span><h4>Suno AI</h4><span class="free">Gratis</span></div>
+        <div class="tool-video"><iframe src="https://www.youtube.com/embed/t5YhwEA_rHI" allowfullscreen loading="lazy"></iframe></div>
+        <div class="tool-info">
+          <p class="desc">Suno AI genera canciones completas con letra y música a partir de texto. Crea canciones educativas sobre cualquier tema para tus clases. ¡A los niños les encanta!</p>
+          <div class="prompt-label">📋 Prompt recomendado</div>
+          <div class="prompt-box">Paso 1: Pide a ChatGPT la letra. Paso 2: Pega en Suno AI. Ejemplo de letra: Canción infantil estilo vallenato sobre las tablas de multiplicar del 2 para grado 2°. Estribillo: "Dos por uno es dos, dos por dos es cuatro, ¡multiplicar es fácil, solo practico un rato!"</div>
+          <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=t5YhwEA_rHI" target="_blank">Tutorial Suno AI · YouTube</a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== AUTHORS ===== -->
+<section class="authors" id="autoras">
+  <h3>👩‍🏫 Equipo de investigación</h3>
+  <div class="authors-grid">
+    <div class="author-card">
+      <div class="name">Maritza Jiménez</div>
+      <div class="role">Docente 2° Primaria · Maestrante UTB</div>
+    </div>
+    <div class="author-card">
+      <div class="name">Betty Lagos</div>
+      <div class="role">Co-investigadora · Maestrante UTB</div>
+    </div>
+    <div class="author-card">
+      <div class="name">Yessica Márquez</div>
+      <div class="role">Co-investigadora · Maestrante UTB</div>
+    </div>
+  </div>
+  <p style="margin-top:30px; opacity:0.75; font-size:14px; max-width:600px; margin-left:auto; margin-right:auto;">
+    Proyecto: "Modelo de asesoría mediado por inteligencia artificial para la planeación docente y atención a la diversidad en tres instituciones educativas públicas colombianas"
+  </p>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>© 2025 · Asesoría Docente con IA · Universidad Tecnológica de Bolívar</p>
+  <p style="margin-top:6px; font-size:12px;">Turbaco · Madrid · Itagüí — Proyecto aplicado Maestría en Educación Mediada por TIC</p>
+</footer>
+
+<script>
+// === NAVIGATION ===
+function showDashboard() {
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('tools-view').classList.remove('active');
+  document.getElementById('tools-view').style.display = 'none';
+  // Hide all tool grids
+  document.querySelectorAll('#tools-view .tool-grid').forEach(g => g.style.display = 'none');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showTools(tool) {
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('tools-view').style.display = 'block';
+  document.getElementById('tools-view').classList.add('active');
+  
+  // Hide all
+  document.querySelectorAll('#tools-view .tool-grid').forEach(g => g.style.display = 'none');
+  
+  // Show selected
+  const el = document.getElementById('tool-' + tool);
+  if (el) {
+    el.style.display = 'grid';
+    document.querySelector('#tools-view .tool-container').scrollIntoView({behavior: 'smooth'});
+  }
+}
+
+function showCategory(cat) {
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('tools-view').style.display = 'block';
+  document.getElementById('tools-view').classList.add('active');
+  
+  document.querySelectorAll('#tools-view .tool-grid').forEach(g => g.style.display = 'none');
+  
+  if (cat === 'plan') {
+    ['chatgpt','claude','gemini','deepseek','copilot'].forEach(id => {
+      document.getElementById('tool-' + id).style.display = 'grid';
+    });
+  } else if (cat === 'invest') {
+    ['notebooklm','perplexity'].forEach(id => {
+      document.getElementById('tool-' + id).style.display = 'grid';
+    });
+  } else if (cat === 'design') {
+    ['canva','gamma','suno'].forEach(id => {
+      document.getElementById('tool-' + id).style.display = 'grid';
+    });
+  }
+  document.querySelector('#tools-view .tool-container').scrollIntoView({behavior: 'smooth'});
+}
+
+// === FADE IN ON SCROLL ===
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
