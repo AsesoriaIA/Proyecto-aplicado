@@ -527,6 +527,157 @@ footer {
   transition: all 0.6s ease;
 }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* === DROPDOWN INSTITUCIONES === */
+.inst-dropdown { position: relative; display: inline-block; }
+.inst-dropbtn {
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.inst-dropbtn:hover { background: var(--navy-dark); transform: translateY(-1px); }
+.inst-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 48px;
+  background: white;
+  min-width: 380px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-hover);
+  z-index: 10;
+  padding: 8px;
+}
+.inst-dropdown:hover .inst-dropdown-content { display: block; }
+.inst-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: var(--navy);
+  font-size: 14px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.inst-item:hover { background: var(--green-light); color: var(--green); }
+.inst-item img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e2e8f0;
+}
+.inst-item .inst-info { flex: 1; }
+.inst-item .inst-name { font-weight: 600; font-size: 13px; display: block; }
+.inst-item .inst-loc { font-size: 11px; color: var(--gray-dark); }
+.inst-item .inst-model { font-size: 10px; color: var(--green); font-weight: 500; }
+
+/* === INSTITUCION VIEW === */
+.inst-view { display: none; padding: 100px 20px 60px; max-width: 1000px; margin: 0 auto; }
+.inst-view.active { display: block; }
+.inst-header {
+  display: flex; align-items: center; gap: 24px;
+  background: white; padding: 32px; border-radius: var(--radius);
+  box-shadow: var(--shadow); margin-bottom: 32px;
+}
+.inst-header img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--green); }
+.inst-header h2 { font-size: 24px; color: var(--navy); margin-bottom: 4px; }
+.inst-header .inst-subtitle { font-size: 14px; color: var(--gray-dark); margin-bottom: 8px; }
+.inst-header .inst-badge {
+  display: inline-block; background: var(--green-light); color: var(--green-dark);
+  padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;
+}
+.inst-back {
+  display: inline-flex; align-items: center; gap: 6px; color: var(--green);
+  text-decoration: none; font-weight: 600; font-size: 14px; margin-bottom: 20px; cursor: pointer;
+}
+.inst-back:hover { text-decoration: underline; }
+.inst-section {
+  background: white; border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 28px; margin-bottom: 24px;
+}
+.inst-section h3 { font-size: 18px; color: var(--navy); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--green-light); }
+.inst-section p, .inst-section li { font-size: 14px; color: #444; line-height: 1.7; }
+.inst-section ul { padding-left: 20px; }
+.inst-section li { margin-bottom: 6px; }
+
+/* === FORMATO PLANEACIÓN === */
+.formato-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px; }
+.formato-table th { background: var(--navy); color: white; padding: 10px 12px; text-align: left; font-weight: 600; }
+.formato-table td { padding: 10px 12px; border: 1px solid #e2e8f0; vertical-align: top; }
+.formato-table tr:nth-child(even) td { background: var(--gray); }
+.formato-table .momento-label { font-weight: 700; color: var(--green-dark); white-space: nowrap; }
+
+/* === GEM TUTORIAL === */
+.gem-tutorial {
+  background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+  border: 2px solid #bbf7d0; border-radius: var(--radius);
+  padding: 28px; margin-top: 20px;
+}
+.gem-tutorial h3 { font-size: 20px; color: var(--green-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.gem-steps { counter-reset: gem-step; list-style: none; padding: 0; }
+.gem-steps li {
+  counter-increment: gem-step; position: relative;
+  padding: 16px 16px 16px 60px; margin-bottom: 12px;
+  background: white; border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04); font-size: 14px; line-height: 1.6;
+}
+.gem-steps li::before {
+  content: counter(gem-step); position: absolute; left: 16px; top: 16px;
+  width: 32px; height: 32px; background: var(--green); color: white;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 14px;
+}
+.gem-steps li strong { color: var(--navy); }
+.gem-steps li code {
+  background: #f1f5f9; padding: 2px 8px; border-radius: 4px; font-size: 13px;
+  color: var(--green-dark); display: inline-block; margin-top: 4px; word-break: break-all;
+}
+
+/* === PROMPT EDITABLE === */
+.prompt-editor-box { background: white; border: 2px solid var(--cyan); border-radius: var(--radius); overflow: hidden; margin-top: 16px; }
+.prompt-editor-header {
+  background: linear-gradient(135deg, var(--navy), var(--blue-dark));
+  color: white; padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.prompt-editor-header h4 { font-size: 16px; margin: 0; }
+.copy-btn {
+  background: var(--green); color: white; border: none; padding: 8px 16px;
+  border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--green-dark); }
+.prompt-textarea {
+  width: 100%; min-height: 300px; border: none; padding: 20px;
+  font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.6;
+  resize: vertical; color: var(--dark);
+}
+.prompt-textarea:focus { outline: none; }
+.prompt-tip { background: var(--gold-light); padding: 12px 20px; font-size: 13px; color: #92400e; border-top: 1px solid #fde68a; }
+
+/* === QUICK DOWNLOADS === */
+.downloads-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
+.download-card {
+  flex: 1; min-width: 200px; background: white; border-radius: var(--radius-sm);
+  padding: 20px; text-align: center; box-shadow: var(--shadow);
+  transition: all 0.3s; cursor: pointer; text-decoration: none; color: var(--dark);
+}
+.download-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.download-card .dl-icon { font-size: 32px; margin-bottom: 8px; }
+.download-card .dl-title { font-weight: 700; font-size: 14px; color: var(--navy); }
+.download-card .dl-desc { font-size: 12px; color: var(--gray-dark); margin-top: 4px; }
+
 </style>
 </head>
 <body>
@@ -538,6 +689,38 @@ footer {
   </div>
   <div class="nav-links">
     <a href="#" onclick="showDashboard()">Inicio</a>
+    <div class="inst-dropdown">
+      <button class="inst-dropbtn">🏫 Instituciones</button>
+      <div class="inst-dropdown-content">
+        <div class="cat-header">Piloto 2025 — 3 Instituciones</div>
+        <a class="inst-item" href="#" onclick="showInstitution('alfonso')">
+          <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_alfonso_lopez.jpg" alt="Alfonso López">
+          <div class="inst-info">
+            <span class="inst-name">I.E. Técnica Alfonso López Pumarejo</span>
+            <span class="inst-loc">📍 Turbaco, Bolívar</span>
+            <span class="inst-model">🧠 Constructivista Cognitivo</span>
+          </div>
+        </a>
+        <div class="cat-divider"></div>
+        <a class="inst-item" href="#" onclick="showInstitution('benedikta')">
+          <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_benedikta.jpg" alt="Benedikta">
+          <div class="inst-info">
+            <span class="inst-name">I.E. Benedikta Zur Nieden</span>
+            <span class="inst-loc">📍 Itagüí, Antioquia</span>
+            <span class="inst-model">🌱 Escuela Nueva</span>
+          </div>
+        </a>
+        <div class="cat-divider"></div>
+        <a class="inst-item" href="#" onclick="showInstitution('maria_teresa')">
+          <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_maria_teresa.jpg" alt="María Teresa Ortiz">
+          <div class="inst-info">
+            <span class="inst-name">IED María Teresa Ortiz Nueva</span>
+            <span class="inst-loc">📍 Madrid, Cundinamarca</span>
+            <span class="inst-model">📚 Aprendizaje Significativo (Ausubel)</span>
+          </div>
+        </a>
+      </div>
+    </div>
     <div class="dropdown">
       <button class="dropbtn">☰ Herramientas</button>
       <div class="dropdown-content">
@@ -710,6 +893,164 @@ footer {
           </div>
           <a href="https://gemini.google.com" target="_blank" class="go-chat">🚀 Ir a Gemini</a>
         </div>
+        <!-- TUTORIAL GEM -->
+        <div class="gem-tutorial" style="margin-top:24px">
+          <h3>🛠️ Crea tu propia Gema (GEM) en Gemini</h3>
+          <p style="margin-bottom:16px; color:#444;">Con este tutorial paso a paso, cualquier docente puede crear su propia Gema personalizada para planear sus clases. ¡Es gratis y toma menos de 10 minutos!</p>
+
+          <ol class="gem-steps">
+            <li>
+              <strong>Abre Gemini</strong> en tu navegador o celular.<br>
+              Ve a <code>https://gemini.google.com</code> e inicia sesión con tu cuenta de Google (la misma de tu correo institucional si tienes Google Workspace).
+            </li>
+            <li>
+              <strong>Accede al editor de Gemas.</strong><br>
+              En el menú lateral izquierdo, busca la sección <strong>"Gems"</strong> y haz clic en <strong>"+ Crear nueva"</strong>. Si no ves el menú, haz clic en las tres líneas (☰) arriba a la izquierda.
+            </li>
+            <li>
+              <strong>Nombre tu Gema.</strong><br>
+              Escribe un nombre descriptivo. Ejemplo:<br>
+              <code>Planeación DUA — [Tu área] — [Tu grado]</code><br>
+              Ejemplo real: <code>Planeación DUA — Matemáticas — 3° Primaria</code>
+            </li>
+            <li>
+              <strong>Pega el prompt del sistema.</strong><br>
+              En el campo <strong>"Instrucciones"</strong>, copia y pega el prompt completo que encontrarás más abajo en esta página. <strong>Personalízalo</strong> cambiando:<br>
+              • Tu <strong>área/asignatura</strong> (ej: Ciencias Naturales, Español, Matemáticas)<br>
+              • Tu <strong>grado</strong> (ej: 2°, 5°, 9°)<br>
+              • Tu <strong>institución</strong> y modelo pedagógico<br>
+              • El <strong>formato</strong> que usa tu IE
+            </li>
+            <li>
+              <strong>Guarda la Gema.</strong><br>
+              Haz clic en <strong>"Guardar"</strong> o <strong>"Crear"</strong>. Tu Gema aparecerá en la lista de Gemas personales en el menú lateral.
+            </li>
+            <li>
+              <strong>¡Pruébala!</strong><br>
+              Abre tu nueva Gema y escribe algo como:<br>
+              <code>"Planea una clase de fracciones para 3° grado, tema introducción a fracciones equivalentes, duración 2 horas"</code><br>
+              La Gema te generará una planeación completa en el formato de tu institución.
+            </li>
+            <li>
+              <strong>Comparte con tus compañeros.</strong><br>
+              Puedes compartir tu Gema haciendo clic en <strong>"Compartir"</strong> y enviando el enlace. ¡Así todos los docentes de tu IE pueden usarla!
+            </li>
+          </ol>
+
+          <div style="margin-top:20px; padding:16px; background:#fffbeb; border-radius:10px; border:1px solid #fde68a;">
+            <strong style="color:#92400e;">💡 Tip:</strong>
+            <span style="color:#92400e; font-size:13px;"> Si tu Gema no responde como esperas, ajusta las instrucciones y vuelve a guardar. Las Gemas aprenden de las instrucciones que les das. Mientras más específico sea tu prompt, mejor será el resultado.</span>
+          </div>
+        </div>
+
+        <!-- PROMPT EDITABLE PARA PLANEACIÓN -->
+        <div style="margin-top:32px">
+          <h3 style="font-size:20px; color:var(--navy); margin-bottom:12px;">📝 Prompt Completo para Planeación Docente</h3>
+          <p style="color:#64748b; font-size:14px; margin-bottom:16px;">Copia este prompt, pégalo en las instrucciones de tu Gema, y personalízalo según tu grado, área e institución.</p>
+
+          <div class="prompt-editor-box">
+            <div class="prompt-editor-header">
+              <h4>🤖 Prompt — Planeación con IA</h4>
+              <button class="copy-btn" onclick="copyPrompt()">📋 Copiar prompt</button>
+            </div>
+            <textarea class="prompt-textarea" id="prompt-planeacion">Eres un asesor pedagógico experto en educación colombiana. Tu función es ayudar a docentes de instituciones educativas públicas a crear planeaciones de clase completas, detalladas y alineadas con los estándares del MEN.
+
+INSTRUCCIONES GENERALES:
+- Responde SIEMPRE en español con lenguaje claro y profesional.
+- Adapta la planeación al grado, área y contexto de la institución.
+- Incluye enfoque diferencial y atención a la diversidad.
+- Usa formato limpio con encabezados, listas y tablas.
+- Si el docente no especifica el grado, pregunta antes de generar.
+
+MODELO PEDAGÓGICO:
+[SELECCIONA EL MODELO DE TU INSTITUCIÓN]
+
+Opción A — Constructivista Cognitivo (Piaget, Vygotsky, Ausubel):
+"El estudiante construye conocimiento a partir de sus esquemas previos. Usa organizadores previos, zona de desarrollo próximo (Vygotsky) y aprendizaje significativo (Ausubel). La clase debe incluir activación de conocimientos previos, construcción guiada y aplicación autónoma."
+
+Opción B — Escuela Nueva:
+"El estudiante es actor principal de su aprendizaje. Trabajo colaborativo, autogestión, aprendizaje por proyectos y resolución de problemas. La guía se estructura por periodos de 12 semanas con momentos A (exploración), B (desarrollo), C (integración) y D (evaluación)."
+
+Opción C — Constructivista Ausubel:
+"El aprendizaje es significativo cuando se conecta con la estructura cognitiva previa. Usa organizadores previos, aprendizaje por recepción significativa, principios de asimilación y diferenciación progresiva. Evaluación diagnóstica, formativa y final."
+
+FORMATO DE PLANEACIÓN:
+Genera la planeación con esta estructura:
+
+1. ENCABEZADO
+- Área/Asignatura:
+- Grado:
+- Docente: [el docente escribirá su nombre]
+- Periodo/Semana/Fecha:
+- Institución Educativa:
+- Modelo Pedagógico:
+
+2. PROPÓSITO DE APRENDIZAJE / DESEMPEÑO
+- Objetivo general del tema
+- Indicadores de logro específicos
+
+3. APRENDIZAJES (Conceptual / Procedimental / Actitudinal)
+- Conceptual: [qué debe saber]
+- Procedimental: [qué debe saber hacer]
+- Actitudinal: [cómo debe comportarse]
+- DBA (Desempeño por Ámbito) si aplica
+
+4. ORGANIZADOR PREVIO
+- Actividad breve para activar conocimientos previos (5-10 min)
+
+5. MOMENTOS DE LA CLASE
+
+   M1 — EXPLORACIÓN / MOTIVACIÓN (15-20 min)
+   - Actividad concreta
+   - Estrategia pedagógica
+   - Recursos necesarios
+
+   M2 — ESTRUCTURACIÓN / DESARROLLO (30-40 min)
+   - Actividad concreta
+   - Estrategia pedagógica
+   - Recursos necesarios
+
+   M3 — APLICACIÓN / PRÁCTICA (20-30 min)
+   - Actividad concreta
+   - Estrategia pedagógica
+   - Recursos necesarios
+
+   M4 — CIERRE / EVALUACIÓN (10-15 min)
+   - Actividad concreta
+   - Instrumento de evaluación
+   - Preguntas de reflexión
+
+6. EVIDENCIAS DE APRENDIZAJE
+- Entregable concreto del estudiante
+- Rúbrica breve o criterios de evaluación
+
+7. RECURSOS
+- Lista de materiales necesarios (digitales y físicos)
+
+8. ATENCIÓN A LA DIVERSIDAD
+- Adaptaciones para estudiantes con PIAR
+- Estrategias para diferentes ritmos de aprendizaje
+- Inclusión de perspectiva de género y étnica
+
+9. REALIMENTACIÓN
+- Lo que más me gustó de la clase fue...
+- Sugiero mejorar...
+- Para la próxima clase sería interesante...
+
+REGLAS ADICIONALES:
+- Si el docente pide una clase específica, genera la planeación completa de una sola vez.
+- Si pide un periodo completo, genera un resumen semanal con los temas principales.
+- Siempre incluye al menos 3 estrategias de aprendizaje activo.
+- Incluye referentes normativos del MEN cuando sea relevante (DBA, Estándares, CPE).
+- Adapta el vocabulario al grado: más lúdico en primaria, más técnico en secundaria/media.
+
+¿En qué grado, área y tema quieres que te genere la primera planeación?</textarea>
+            <div class="prompt-tip">
+              ⚡ <strong>Tip:</strong> Antes de copiar, reemplaza los textos entre corchetes [ ] con tu información. Si no sabes qué modelo pedagógico usa tu IE, revisa la sección de <a href="#" onclick="showInstitution('alfonso'); return false;" style="color:#92400e; font-weight:600;">Instituciones</a> en el menú superior.
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -877,6 +1218,265 @@ footer {
   </div>
 </section>
 
+
+<!-- ===== INSTITUCIONES VIEW ===== -->
+<section class="inst-view" id="inst-view">
+
+  <!-- BOTÓN VOLVER -->
+  <a class="inst-back" onclick="showDashboard()">← Volver al inicio</a>
+
+  <!-- ==================== ALFONSO LÓPEZ ==================== -->
+  <div id="inst-alfonso" style="display:none">
+    <div class="inst-header">
+      <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_alfonso_lopez.jpg" alt="Escudo Alfonso López">
+      <div>
+        <h2>I.E. Técnica Alfonso López Pumarejo</h2>
+        <div class="inst-subtitle">📍 Turbaco, Bolívar · Calendario A · Jornada Mañana y Tarde</div>
+        <span class="inst-badge">🧠 Pedagogía Humanística — Constructivista Cognitivo</span>
+      </div>
+    </div>
+
+    <div class="inst-section">
+      <h3>📚 Modelo Pedagógico</h3>
+      <p>Pedagogía Humanística fundamentada en el <strong>modelo pedagógico Constructivista Cognitivo</strong>, con énfasis en:</p>
+      <ul>
+        <li><strong>Teoría Psicológica Genética</strong> — Jean Piaget (desarrollo por etapas)</li>
+        <li><strong>Teoría Psicológica y Culturista</strong> — Lev Vygotsky (zona de desarrollo próximo)</li>
+        <li><strong>Teoría del Aprendizaje Significativo</strong> — David Ausubel (organizadores previos)</li>
+      </ul>
+    </div>
+
+    <div class="inst-section">
+      <h3>📋 Formato de Planeación</h3>
+      <p>La planeación se estructura por <strong>clase</strong> con tres momentos fundamentales:</p>
+      <table class="formato-table">
+        <thead>
+          <tr>
+            <th>Momento</th>
+            <th>Descripción</th>
+            <th>Tiempo</th>
+            <th>Estrategia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="momento-label">🔍 Exploración</td>
+            <td>Activación de conocimientos previos, presentación del tema y motivación</td>
+            <td>30 min</td>
+            <td>Aprendizaje Activo</td>
+          </tr>
+          <tr>
+            <td class="momento-label">🏗️ Estructuración</td>
+            <td>Desarrollo del contenido, interacción docente-estudiante, construcción del conocimiento</td>
+            <td>50 min</td>
+            <td>Trabajo colaborativo / Individual</td>
+          </tr>
+          <tr>
+            <td class="momento-label">✅ Práctica / Evaluación</td>
+            <td>Aplicación, práctica y evaluación del aprendizaje</td>
+            <td>40 min</td>
+            <td>Producción / Autoevaluación</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="inst-section">
+      <h3>📝 Estructura del Formato</h3>
+      <table class="formato-table">
+        <thead>
+          <tr><th>Campo</th><th>Descripción</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Área/Asignatura</strong></td><td>Materia que imparte el docente</td></tr>
+          <tr><td><strong>Grado</strong></td><td>Curso al que va dirigido</td></tr>
+          <tr><td><strong>Docente</strong></td><td>Nombre del docente</td></tr>
+          <tr><td><strong>Periodo / Semana / Fecha</strong></td><td>Ubicación temporal de la clase</td></tr>
+          <tr><td><strong>Tema</strong></td><td>Título del tema a desarrollar</td></tr>
+          <tr><td><strong>Propósito / Desempeño</strong></td><td>Objetivo de aprendizaje esperado</td></tr>
+          <tr><td><strong>Momentos de la clase</strong></td><td>Exploración → Estructuración → Práctica</td></tr>
+          <tr><td><strong>Actividades</strong></td><td>Acciones concretas por momento</td></tr>
+          <tr><td><strong>Estrategias de Aprendizaje Activo</strong></td><td>Técnicas pedagógicas empleadas</td></tr>
+          <tr><td><strong>Tiempo</strong></td><td>Distribución temporal por momento</td></tr>
+          <tr><td><strong>Recursos</strong></td><td>Materiales necesarios</td></tr>
+          <tr><td><strong>Realimentación</strong></td><td>Retroalimentación del estudiante</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="inst-section">
+      <h3>💡 Consejos para usar IA en tu planeación</h3>
+      <ul>
+        <li> использова el <a href="#" onclick="showTools('chatgpt'); return false;">ChatGPT</a> o <a href="#" onclick="showTools('claude'); return false;">Claude</a> para generar actividades por momento</li>
+        <li>Pide que las actividades respeten los tiempos (30-50-40 min)</li>
+        <li>Solicita estrategias de aprendizaje activo: trabajo grupal, discusión, indagación</li>
+        <li>Incluye en el prompt: <code>"Enfoque constructivista con énfasis en Piaget, Vygotsky y Ausubel"</code></li>
+        <li>Siempre revisa y adapta la output de la IA a tu contexto real</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== BENEDIKTA ZUR NIEDEN ==================== -->
+  <div id="inst-benedikta" style="display:none">
+    <div class="inst-header">
+      <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_benedikta.jpg" alt="Escudo Benedikta">
+      <div>
+        <h2>I.E. Benedikta Zur Nieden</h2>
+        <div class="inst-subtitle">📍 Itagüí, Antioquia · Calendario A · Jornada Mañana y Tarde</div>
+        <span class="inst-badge">🌱 Modelo Escuela Nueva</span>
+      </div>
+    </div>
+
+    <div class="inst-section">
+      <h3>📚 Modelo Pedagógico</h3>
+      <p>Modelo <strong>Escuela Nueva</strong>, que promueve:</p>
+      <ul>
+        <li><strong>Aprendizaje autónomo y autogestionado</strong> del estudiante</li>
+        <li><strong>Trabajo colaborativo</strong> como eje central del proceso</li>
+        <li><strong>Flexibilidad curricular</strong> adaptada al contexto</li>
+        <li><strong>Participación activa</strong> de toda la comunidad educativa</li>
+        <li><strong>Aprendizaje por proyectos</strong> y resolución de problemas</li>
+      </ul>
+    </div>
+
+    <div class="inst-section">
+      <h3>📋 Formato de Guía de Aprendizaje</h3>
+      <p>La guía se estructura por <strong>periodo académico de 12 semanas</strong>, dividido en momentos:</p>
+      <table class="formato-table">
+        <thead>
+          <tr><th>Momento</th><th>Función</th><th>Tipo de trabajo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="momento-label">📌 Momento A</td>
+            <td>Exploración e introducción del tema. Activación de saberes previos y presentación de los nuevos contenidos</td>
+            <td>Collaborativo + Individual</td>
+          </tr>
+          <tr>
+            <td class="momento-label">📌 Momento B</td>
+            <td>Desarrollo y profundización. Los estudiantes trabajan los temas con guías, actividades y recursos</td>
+            <td>Collaborativo + Individual</td>
+          </tr>
+          <tr>
+            <td class="momento-label">📌 Momento C</td>
+            <td>Síntesis y aplicación. Recogida de saberes, una o dos actividades integradoras donde los estudiantes apliquen lo aprendido</td>
+            <td>Principalmente colaborativo</td>
+          </tr>
+          <tr>
+            <td class="momento-label">📌 Momento D</td>
+            <td>Evaluación y cierre. Autoevaluación, coevaluación y evaluación del docente</td>
+            <td>Individual + grupal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="inst-section">
+      <h3>📝 Estructura de la Guía</h3>
+      <table class="formato-table">
+        <thead>
+          <tr><th>Sección</th><th>Contenido</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Referentes de Calidad</strong></td><td>Lineamientos MEN, Estándares Básicos de Competencias, Matriz de Referencia ICFES</td></tr>
+          <tr><td><strong>Recomendaciones</strong></td><td>Instrucciones generales para el estudiante (trabajo colaborativo, no copia, etc.)</td></tr>
+          <tr><td><strong>Vocabulario</strong></td><td>Palabras clave del tema con su significado</td></tr>
+          <tr><td><strong>Indicadores de Logro</strong></td><td>Lo que el estudiante debe lograr al finalizar</td></tr>
+          <tr><td><strong>Competencias</strong></td><td>Competencias a desarrollar</td></tr>
+          <tr><td><strong>Contenidos (Momento A y B)</strong></td><td>Temas por semana con actividades</td></tr>
+          <tr><td><strong>Actividades Integradoras (Momento C)</strong></td><td>Una o dos actividades que integren los saberes</td></tr>
+          <tr><td><strong>Evaluación (Momento D)</strong></td><td>Rúbricas de autoevaluación y coevaluación</td></tr>
+          <tr><td><strong>Glosario</strong></td><td>Términos del tema</td></tr>
+          <tr><td><strong>Bibliografía / Cibergrafía</strong></td><td>Fuentes consultadas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="inst-section">
+      <h3>💡 Consejos para usar IA en tu guía</h3>
+      <ul>
+        <li>Usa <a href="#" onclick="showTools('chatgpt'); return false;">ChatGPT</a> para generar vocabulario y glosarios del tema</li>
+        <li>Pide actividades diferenciadas para momentos A, B, C y D</li>
+        <li>Solicita rúbricas de autoevaluación y coevaluación</li>
+        <li>Incluye en el prompt: <code>"Modelo Escuela Nueva, guía de aprendizaje de 12 semanas, momentos A-D, trabajo colaborativo"</code></li>
+        <li>Adapta las actividades al contexto rural o urbano de tu institución</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== MARÍA TERESA ORTIZ ==================== -->
+  <div id="inst-maria_teresa" style="display:none">
+    <div class="inst-header">
+      <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_maria_teresa.jpg" alt="Escudo María Teresa Ortiz">
+      <div>
+        <h2>IED María Teresa Ortiz Nueva</h2>
+        <div class="inst-subtitle">📍 Madrid, Cundinamarca · Calendario A · Jornada Mañana y Tarde</div>
+        <span class="inst-badge">📚 Constructivista — Aprendizaje Significativo (Ausubel)</span>
+      </div>
+    </div>
+
+    <div class="inst-section">
+      <h3>📚 Modelo Pedagógico</h3>
+      <p>Modelo pedagógico <strong>constructivista basado en la teoría del Aprendizaje Significativo de David Ausubel</strong>:</p>
+      <ul>
+        <li><strong>Aprendizaje Significativo</strong> — El nuevo conocimiento se conecta con la estructura cognitiva previa</li>
+        <li><strong>Organizadores Previos</strong> — Puente cognitivo entre lo que el estudiante sabe y lo nuevo</li>
+        <li><strong>Principio de Asimilación</strong> — La información nueva reorganiza los conocimientos existentes</li>
+        <li><strong>Aprendizaje por Recepción</strong> — El docente presenta información estructurada que el estudiante asimila</li>
+        <li><strong>Evaluación diagnóstica, formativa y final</strong> — Tres momentos de seguimiento</li>
+      </ul>
+    </div>
+
+    <div class="inst-section">
+      <h3>📋 Formato de Planeador de Clase (Trimestral)</h3>
+      <p>El planeador se estructura por <strong>trimestre (13 semanas)</strong>:</p>
+      <table class="formato-table">
+        <thead>
+          <tr><th>Semana</th><th>Contenido</th><th>Indicador de Desempeño</th><th>Evidencias</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Semana 1</strong></td><td>Diagnóstico (C/P)</td><td>Prueba diagnóstica</td><td>Diagnóstico</td></tr>
+          <tr><td><strong>Semana 2-5</strong></td><td>Desarrollo del DBA (Conceptual / Procedimental)</td><td>Indicadores de desempeño</td><td>Evidencias 1-4</td></tr>
+          <tr><td><strong>Semana 6-7</strong></td><td>Plan Lector</td><td>Comprensión lectora</td><td>Control de lectura</td></tr>
+          <tr><td><strong>Semana 8-11</strong></td><td>Profundización / Proyectos transversales</td><td>Aplicación de saberes</td><td>Evidencias</td></tr>
+          <tr><td><strong>Semana 12</strong></td><td>Proyecto de área / Evaluación trimestral</td><td>Integración de aprendizajes</td><td>Producto final</td></tr>
+          <tr><td><strong>Semana 13</strong></td><td>Cierre de notas / Autoevaluación</td><td>Reflexión sobre el aprendizaje</td><td>Autoevaluación</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="inst-section">
+      <h3>📝 Estructura del Planeador</h3>
+      <table class="formato-table">
+        <thead>
+          <tr><th>Campo</th><th>Descripción</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Área / Asignatura</strong></td><td>Materia y contenido específico</td></tr>
+          <tr><td><strong>Docente / Sede / Jornada / Grado</strong></td><td>Datos de identificación</td></tr>
+          <tr><td><strong>Aprendizajes</strong></td><td>Conceptual / Procedimental / Actitudinal + DBA</td></tr>
+          <tr><td><strong>Indicador de Desempeño</strong></td><td>Lo que el estudiante demuestra que sabe hacer</td></tr>
+          <tr><td><strong>Evidencias de Aprendizaje</strong></td><td>Producto o evidencia que demuestra el logro</td></tr>
+          <tr><td><strong>Entregable</strong></td><td>Trabajo concreto que entrega el estudiante</td></tr>
+          <tr><td><strong>Observaciones</strong></td><td>Notas del docente sobre el proceso</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="inst-section">
+      <h3>💡 Consejos para usar IA en tu planeación</h3>
+      <ul>
+        <li>Usa <a href="#" onclick="showTools('gemini'); return false;">Gemini</a> con nuestra GEM para generar planeaciones con enfoque Ausubel</li>
+        <li>Pide que los aprendizajes estén clasificados en Conceptual, Procedimental y Actitudinal</li>
+        <li>Solicita organizadores previos para cada tema</li>
+        <li>Incluye en el prompt: <code>"Modelo constructivista Ausubel, aprendizaje significativo por recepción, planeador trimestral 13 semanas"</code></li>
+        <li>Incluye evidencias variadas: mapas conceptuales, exposiciones, talleres, proyectos</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+
 <!-- ===== AUTHORS ===== -->
 <section class="authors" id="autoras">
   <h3>👩‍🏫 Equipo de investigación</h3>
@@ -911,6 +1511,9 @@ function showDashboard() {
   document.getElementById('dashboard').style.display = 'block';
   document.getElementById('tools-view').classList.remove('active');
   document.getElementById('tools-view').style.display = 'none';
+  // Hide institution view
+  const instView = document.getElementById('inst-view');
+  if (instView) { instView.style.display = 'none'; instView.classList.remove('active'); }
   // Hide all tool grids
   document.querySelectorAll('#tools-view .tool-grid').forEach(g => g.style.display = 'none');
   window.scrollTo({top: 0, behavior: 'smooth'});
@@ -953,6 +1556,47 @@ function showCategory(cat) {
     });
   }
   document.querySelector('#tools-view .tool-container').scrollIntoView({behavior: 'smooth'});
+}
+
+
+// === INSTITUCIONES ===
+function showInstitution(inst) {
+  // Hide other views
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('tools-view').style.display = 'none';
+  document.getElementById('tools-view').classList.remove('active');
+
+  // Show institution view
+  const instView = document.getElementById('inst-view');
+  instView.style.display = 'block';
+  instView.classList.add('active');
+
+  // Hide all institution panels
+  document.querySelectorAll('#inst-view > div[id^="inst-"]').forEach(d => d.style.display = 'none');
+
+  // Show selected institution
+  const panel = document.getElementById('inst-' + inst);
+  if (panel) panel.style.display = 'block';
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// === COPY PROMPT ===
+function copyPrompt() {
+  const textarea = document.getElementById('prompt-planeacion');
+  textarea.select();
+  navigator.clipboard.writeText(textarea.value).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✅ ¡Copiado!';
+    btn.style.background = '#16a34a';
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.style.background = '';
+    }, 2000);
+  }).catch(() => {
+    document.execCommand('copy');
+  });
 }
 
 // === FADE IN ON SCROLL ===
