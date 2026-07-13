@@ -702,7 +702,7 @@ footer {
       <button class="inst-dropbtn">🏫 Instituciones</button>
       <div class="inst-dropdown-content">
         
-        <a class="inst-item" href="#" onclick="showInstitution('alfonso')">
+        <a class="inst-item" href="#" onclick="event.preventDefault(); closeDropdowns(); showInstitution('alfonso')">
           <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_alfonso_lopez.jpg" alt="Alfonso López">
           <div class="inst-info">
             <span class="inst-name">I.E. Técnica Alfonso López Pumarejo</span>
@@ -711,7 +711,7 @@ footer {
           </div>
         </a>
         <div class="cat-divider"></div>
-        <a class="inst-item" href="#" onclick="showInstitution('benedikta')">
+        <a class="inst-item" href="#" onclick="event.preventDefault(); closeDropdowns(); showInstitution('benedikta')">
           <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_benedikta.jpg" alt="Benedikta">
           <div class="inst-info">
             <span class="inst-name">I.E. Benedikta Zur Nieden</span>
@@ -720,7 +720,7 @@ footer {
           </div>
         </a>
         <div class="cat-divider"></div>
-        <a class="inst-item" href="#" onclick="showInstitution('maria_teresa')">
+        <a class="inst-item" href="#" onclick="event.preventDefault(); closeDropdowns(); showInstitution('maria_teresa')">
           <img src="https://asesoriaia.github.io/Proyecto-aplicado/escudo_maria_teresa.jpg" alt="María Teresa Ortiz">
           <div class="inst-info">
             <span class="inst-name">IED María Teresa Ortiz Nueva</span>
@@ -1609,25 +1609,31 @@ function copyPrompt() {
 }
 
 
-// === TOUCH SUPPORT FOR MOBILE DROPDOWNS ===
+function closeDropdowns() {
+  document.querySelectorAll('.inst-dropdown-content, .dropdown-content').forEach(d => d.style.display = 'none');
+}
+
+// === MOBILE DROPDOWN TOGGLE ===
 document.querySelectorAll('.inst-dropbtn, .dropbtn').forEach(btn => {
   btn.addEventListener('click', function(e) {
     e.stopPropagation();
     const parent = this.closest('.inst-dropdown, .dropdown');
     const content = parent.querySelector('.inst-dropdown-content, .dropdown-content');
-    // Close other dropdowns
+    const wasOpen = content.style.display === 'block';
+    // Close all
     document.querySelectorAll('.inst-dropdown-content, .dropdown-content').forEach(d => {
-      if (d !== content) d.style.display = 'none';
+      d.style.display = 'none';
     });
-    // Toggle this one
-    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    // Toggle
+    if (!wasOpen) content.style.display = 'block';
   });
 });
-// Close dropdowns when clicking outside
-document.addEventListener('click', function() {
-  document.querySelectorAll('.inst-dropdown-content, .dropdown-content').forEach(d => {
-    d.style.display = '';
-  });
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.inst-dropdown, .dropdown')) {
+    document.querySelectorAll('.inst-dropdown-content, .dropdown-content').forEach(d => {
+      d.style.display = 'none';
+    });
+  }
 });
 
 // === FADE IN ON SCROLL ===
