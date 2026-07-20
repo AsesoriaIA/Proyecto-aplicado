@@ -65,6 +65,67 @@ nav {
 }
 .nav-links a:hover { color: var(--green); }
 
+
+/* === HAMBURGER + MOBILE MENU === */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--navy);
+  z-index: 1001;
+  line-height: 1;
+}
+.hamburger.active { color: var(--green); }
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 68px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 999;
+  padding: 16px 0;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.mobile-menu.active { display: block; }
+.mobile-menu a,
+.mobile-menu button.mobile-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  padding: 16px 24px;
+  text-decoration: none;
+  color: var(--navy);
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.2s;
+}
+.mobile-menu a:hover,
+.mobile-menu button.mobile-link:hover { background: var(--green-light); color: var(--green); }
+.mobile-sub {
+  display: none;
+  background: #f8fafb;
+}
+.mobile-sub.active { display: block; }
+.mobile-sub a {
+  font-size: 14px;
+  padding: 13px 24px 13px 52px;
+  border-bottom: 1px solid #eef0f2;
+}
+.mobile-sub a .inst-loc,
+.mobile-sub a .inst-model { font-size: 12px; color: var(--gray-dark); }
+
 /* === DROPDOWN CATEGORÍAS === */
 .dropdown { position: relative; display: inline-block; }
 .dropbtn {
@@ -493,7 +554,9 @@ footer {
 @media (max-width: 768px) {
   nav { padding: 0 12px; height: 60px; }
   .nav-brand { font-size: 15px; }
-  .nav-links a { display: none; }
+  .nav-links { display: none; }
+  .hamburger { display: block; }
+  .mobile-menu { top: 60px; }
   .hero { padding: 90px 16px 50px; }
   .hero h1 { font-size: 24px; }
   .hero p { font-size: 14px; }
@@ -829,6 +892,7 @@ footer {
   <div class="nav-brand">
     <span>GEM</span> Asesoría Docente
   </div>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menú">☰</button>
   <div class="nav-links">
     <a href="#" onclick="showDashboard()">Inicio</a>
     <a href="#" onclick="showModelo()">🧠 El Modelo</a>
@@ -886,6 +950,45 @@ footer {
     </div>
   </div>
 </nav>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="closeMobileMenu(); showDashboard()">🏠 Inicio</a>
+  <button class="mobile-link" onclick="toggleMobileSub('mobileInst')">🏫 Instituciones ▾</button>
+  <div class="mobile-sub" id="mobileInst">
+    <a href="#" onclick="closeMobileMenu(); showInstitution('alfonso')">
+      <div>
+        <strong>I.E. Técnica Alfonso López Pumarejo</strong><br>
+        <span class="inst-loc">📍 Turbaco, Bolívar</span>
+      </div>
+    </a>
+    <a href="#" onclick="closeMobileMenu(); showInstitution('benedikta')">
+      <div>
+        <strong>I.E. Benedikta Zur Nieden</strong><br>
+        <span class="inst-loc">📍 Itagüí, Antioquia</span>
+      </div>
+    </a>
+    <a href="#" onclick="closeMobileMenu(); showInstitution('maria_teresa')">
+      <div>
+        <strong>IED María Teresa Ortiz Nueva</strong><br>
+        <span class="inst-loc">📍 Madrid, Cundinamarca</span>
+      </div>
+    </a>
+  </div>
+  <button class="mobile-link" onclick="toggleMobileSub('mobileTools')">🛠️ Herramientas ▾</button>
+  <div class="mobile-sub" id="mobileTools">
+    <a href="#" onclick="closeMobileMenu(); showTools('chatgpt')">🤖 ChatGPT</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('claude')">🧠 Claude</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('gemini')">🌀 Gemini</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('deepseek')">🔍 Deepseek</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('copilot')">💻 Copilot</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('notebooklm')">📓 NotebookLM</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('perplexity')">🔎 Perplexity</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('canva')">🎨 Canva IA</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('gamma')">📊 Gamma</a>
+    <a href="#" onclick="closeMobileMenu(); showTools('suno')">🎵 Suno AI</a>
+  </div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
@@ -1830,6 +1933,28 @@ REGLAS:
 
 <script>
 // === NAVIGATION ===
+// === MOBILE MENU ===
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('active');
+  btn.classList.toggle('active');
+  btn.textContent = menu.classList.contains('active') ? '✕' : '☰';
+}
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  menu.classList.remove('active');
+  btn.classList.remove('active');
+  btn.textContent = '☰';
+}
+function toggleMobileSub(id) {
+  document.getElementById(id).classList.toggle('active');
+}
+function closeDropdowns() {
+  document.querySelectorAll('.dropdown-content, .inst-dropdown-content').forEach(d => d.style.display = 'none');
+}
+
 function showDashboard() {
   document.getElementById('dashboard').style.display = 'block';
   document.getElementById('tools-view').classList.remove('active');
