@@ -520,6 +520,139 @@ footer {
   .tool-card .tool-top .emoji { font-size: 22px; }
 }
 
+/* === SECCIÓN EL MODELO === */
+.modelo-section { display: none; }
+.modelo-section.active { display: block; }
+.modelo-hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a6a 50%, var(--green-dark) 100%);
+  color: white;
+  padding: 100px 24px 60px;
+  text-align: center;
+}
+.modelo-hero h1 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; margin-bottom: 16px; }
+.modelo-hero h1 span { color: var(--cyan); }
+.modelo-hero p { font-size: 17px; max-width: 750px; margin: 0 auto; opacity: 0.9; line-height: 1.7; }
+.modelo-container { max-width: 1000px; margin: 0 auto; padding: 50px 20px; }
+.modelo-intro {
+  background: white;
+  border-radius: var(--radius);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  margin-bottom: 40px;
+  text-align: center;
+}
+.modelo-intro h2 { font-size: 24px; color: var(--navy); margin-bottom: 14px; }
+.modelo-intro p { color: var(--gray-dark); font-size: 16px; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+/* Timeline */
+.timeline { position: relative; padding: 20px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--green), var(--blue));
+  transform: translateX(-50%);
+}
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  position: relative;
+}
+.timeline-item:nth-child(odd) { flex-direction: row; }
+.timeline-item:nth-child(even) { flex-direction: row-reverse; }
+.timeline-content { width: 45%; background: white; border-radius: var(--radius-sm); padding: 24px; box-shadow: var(--shadow); }
+.timeline-item:nth-child(odd) .timeline-content { margin-right: auto; text-align: right; }
+.timeline-item:nth-child(even) .timeline-content { margin-left: auto; text-align: left; }
+.timeline-dot {
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  z-index: 2;
+  box-shadow: 0 0 0 4px white, 0 0 0 6px var(--green);
+}
+.timeline-content h3 { font-size: 17px; color: var(--navy); margin-bottom: 6px; }
+.timeline-content .phase-tag {
+  display: inline-block; background: var(--green-light); color: var(--green);
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; margin-bottom: 10px; text-transform: uppercase;
+}
+.timeline-content p { font-size: 14px; color: var(--gray-dark); line-height: 1.7; }
+
+/* Talleres */
+.talleres-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px; }
+.taller-card {
+  background: white; border-radius: var(--radius-sm); padding: 28px 22px;
+  box-shadow: var(--shadow); text-align: center; border-top: 4px solid var(--green);
+  transition: all 0.3s;
+}
+.taller-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.taller-card .taller-num {
+  display: inline-block; background: var(--green); color: white;
+  width: 36px; height: 36px; border-radius: 50%;
+  line-height: 36px; font-weight: 800; font-size: 16px; margin-bottom: 12px;
+}
+.taller-card h4 { font-size: 16px; color: var(--navy); margin-bottom: 8px; }
+.taller-card p { font-size: 13px; color: var(--gray-dark); line-height: 1.6; }
+.taller-card .taller-producto {
+  margin-top: 12px; background: var(--gray); border-radius: 8px;
+  padding: 10px; font-size: 12px; color: var(--navy); font-weight: 600;
+}
+
+/* Marco conceptual */
+.marco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; }
+.marco-item { background: white; border-radius: var(--radius-sm); padding: 22px 18px; box-shadow: var(--shadow); text-align: center; border-left: 4px solid var(--blue); }
+.marco-item .marco-icon { font-size: 32px; margin-bottom: 10px; }
+.marco-item h4 { font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+.marco-item p { font-size: 12px; color: var(--gray-dark); line-height: 1.5; }
+
+/* Validación */
+.validacion-box { background: white; border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow); margin-top: 40px; }
+.validacion-box h2 { font-size: 22px; color: var(--navy); margin-bottom: 16px; text-align: center; }
+.validacion-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 20px; }
+.validacion-step { text-align: center; padding: 20px; background: var(--gray); border-radius: var(--radius-sm); }
+.validacion-step .step-num {
+  display: inline-block; background: var(--blue); color: white;
+  width: 32px; height: 32px; border-radius: 50%;
+  line-height: 32px; font-weight: 800; font-size: 14px; margin-bottom: 10px;
+}
+.validacion-step h4 { font-size: 14px; color: var(--navy); margin-bottom: 6px; }
+.validacion-step p { font-size: 12px; color: var(--gray-dark); line-height: 1.5; }
+
+/* GEM Integration */
+.gem-integration {
+  background: linear-gradient(135deg, var(--green), #00a870);
+  color: white; border-radius: var(--radius); padding: 36px;
+  text-align: center; margin-top: 40px;
+}
+.gem-integration h2 { font-size: 22px; margin-bottom: 12px; }
+.gem-integration p { font-size: 15px; opacity: 0.9; max-width: 700px; margin: 0 auto 20px; line-height: 1.7; }
+.gem-integration .gem-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: white; color: var(--green); text-decoration: none;
+  padding: 12px 28px; border-radius: 50px; font-weight: 700; font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline::before { left: 20px; }
+  .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; }
+  .timeline-content, .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content { width: calc(100% - 50px); margin-left: 50px; text-align: left; }
+  .timeline-dot { left: 20px; }
+  .talleres-grid, .validacion-steps { grid-template-columns: 1fr; }
+  .modelo-container { padding: 30px 14px; }
+  .modelo-intro { padding: 24px 18px; }
+}
+
 /* === SCROLL ANIMATIONS === */
 .fade-in {
   opacity: 0;
@@ -698,6 +831,7 @@ footer {
   </div>
   <div class="nav-links">
     <a href="#" onclick="showDashboard()">Inicio</a>
+    <a href="#" onclick="showModelo()">🧠 El Modelo</a>
     <div class="inst-dropdown">
       <button class="inst-dropbtn">🏫 Instituciones</button>
       <div class="inst-dropdown-content">
@@ -1619,6 +1753,75 @@ REGLAS:
   </p>
 </section>
 
+<!-- ===== SECCIÓN EL MODELO ===== -->
+<section id="modelo-view" class="modelo-section">
+  <div class="modelo-hero">
+    <h1>El <span>Modelo</span> de Asesoría</h1>
+    <p>Un modelo de asesoría mediado por inteligencia artificial diseñado para acompañar a los docentes de colegios públicos en la planeación inclusiva y el uso pedagógico de la IA.</p>
+  </div>
+  <div class="modelo-container">
+    <div class="modelo-intro">
+      <h2>¿Qué es este modelo?</h2>
+      <p>No somos solo un directorio de herramientas. Somos un <strong>modelo de asesoría</strong> construido desde la investigación-acción participativa, que combina inteligencia artificial, acompañamiento pedagógico y principios de diseño universal para el aprendizaje (DUA) para transformar la práctica docente en tres instituciones educativas públicas colombianas.</p>
+    </div>
+
+    <h2 style="text-align:center;color:var(--navy);margin-bottom:10px;">📐 Las 4 fases del proyecto</h2>
+    <p style="text-align:center;color:var(--gray-dark);margin-bottom:30px;">Un ciclo de investigación-acción que parte del diagnóstico y llega a la sistematización</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-content"><span class="phase-tag">Marzo — Junio 2026</span><h3>📋 Fase 1. Diagnóstico</h3><p>Se aplicó una encuesta diagnóstica a <strong>43 docentes</strong> de tres instituciones para entender cómo usan la IA y la inclusión. El 79% usa IA pero solo para tareas rutinarias.</p></div>
+        <div class="timeline-dot">1</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content"><span class="phase-tag">Julio — Agosto 2026</span><h3>🔧 Fase 2. Diseño del modelo</h3><p>Se diseña el modelo: prompts especializados, tutoriales, Gema de Gemini personalizada, guías y este sitio web. Adaptado a cada contexto tecnológico.</p></div>
+        <div class="timeline-dot">2</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content"><span class="phase-tag">Agosto — Septiembre 2026</span><h3>🚀 Fase 3. Implementación piloto</h3><p><strong>3 talleres presenciales</strong> en cada institución (90 min c/u). Los docentes interactúan con la GEM y elaboran productos de planeación inclusiva.</p></div>
+        <div class="timeline-dot">3</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content"><span class="phase-tag">Septiembre — Octubre 2026</span><h3>📊 Fase 4. Evaluación</h3><p>Se analizan productos de taller, encuestas, guías de planeación rápida, grupos focales y notas de observación para identificar qué funcionó y por qué.</p></div>
+        <div class="timeline-dot">4</div>
+      </div>
+    </div>
+
+    <h2 style="text-align:center;color:var(--navy);margin:50px 0 10px;">🏫 Los 3 Talleres Presenciales</h2>
+    <p style="text-align:center;color:var(--gray-dark);margin-bottom:20px;">Cada taller dura máximo 90 minutos</p>
+    <div class="talleres-grid">
+      <div class="taller-card"><div class="taller-num">1</div><h4>Diagnóstico y línea base</h4><p>Los docentes elaboran un primer producto que refleja su práctica actual de planeación inclusiva.</p><div class="taller-producto">📦 Prompt inicial + producto taller 1</div></div>
+      <div class="taller-card"><div class="taller-num">2</div><h4>Formación y práctica</h4><p>Se introducen prompts, guías y principios DUA. Los docentes diseñan un ajuste razonable con apoyo de IA.</p><div class="taller-producto">📦 Actividad DUA + prompt propio</div></div>
+      <div class="taller-card"><div class="taller-num">3</div><h4>Evaluación y cierre</h4><p>Producto final que evidencia cambios. Se aplican instrumentos de evaluación y se realizan grupos focales.</p><div class="taller-producto">📦 Guía de planeación rápida</div></div>
+    </div>
+
+    <h2 style="text-align:center;color:var(--navy);margin:50px 0 10px;">📚 Marco conceptual</h2>
+    <p style="text-align:center;color:var(--gray-dark);margin-bottom:20px;">Cuatro pilares teóricos fundamentales</p>
+    <div class="marco-grid">
+      <div class="marco-item"><div class="marco-icon">🤖</div><h4>IA en Educación</h4><p>Uso pedagógico de herramientas generativas. García-Peñalvo (2023), Puerto & Gutiérrez-Esteban (2022).</p></div>
+      <div class="marco-item"><div class="marco-icon">♿</div><h4>Educación Inclusiva</h4><p>Decreto 1421 de 2017: PIAR como mecanismo para atender la diversidad en el aula.</p></div>
+      <div class="marco-item"><div class="marco-icon">🎯</div><h4>DUA</h4><p>Diseño Universal para el Aprendizaje: Representación, Acción/Expresión y Motivación. CAST (2018).</p></div>
+      <div class="marco-item"><div class="marco-icon">🤝</div><h4>Asesoría Pedagógica</h4><p>Acompañamiento situado y colaborativo. UNESCO (2024), Kemmis et al. (2014).</p></div>
+    </div>
+
+    <div class="validacion-box">
+      <h2>✅ Validación del modelo</h2>
+      <p style="text-align:center;color:var(--gray-dark);margin-bottom:20px;">Tres mecanismos complementarios</p>
+      <div class="validacion-steps">
+        <div class="validacion-step"><div class="step-num">1</div><h4>Juicio de expertos</h4><p>El asesor de investigación revisa prompts, guías y sitio web antes del piloto.</p></div>
+        <div class="validacion-step"><div class="step-num">2</div><h4>Validación por uso</h4><p>Los docentes evalúan el sitio y la GEM durante los 3 talleres mediante formularios.</p></div>
+        <div class="validacion-step"><div class="step-num">3</div><h4>Encuesta post-piloto</h4><p>Cuestionario de 16 preguntas sobre satisfacción, utilidad y cambios en la práctica docente.</p></div>
+      </div>
+    </div>
+
+    <div class="gem-integration">
+      <h2>💎 La Gema de Gemini</h2>
+      <p>Una asistente de IA personalizada que conoce los principios DUA, el Decreto 1421 y las necesidades de tus estudiantes. Pregúntale cómo crear un PIAR, una actividad inclusiva o una planeación adaptada.</p>
+      <a class="gem-link" href="https://gemini.google.com/gem/1ilyb7PcKftUNfrHRb6YsJ1uSHwT0l_B_?usp=sharing" target="_blank">🤖 Accede a la Gema</a>
+    </div>
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer>
   <p>© 2026 · Asesoría Docente con IA · Universidad Tecnológica de Bolívar</p>
@@ -1631,11 +1834,23 @@ function showDashboard() {
   document.getElementById('dashboard').style.display = 'block';
   document.getElementById('tools-view').classList.remove('active');
   document.getElementById('tools-view').style.display = 'none';
+  document.getElementById('modelo-view').classList.remove('active');
+  document.getElementById('modelo-view').style.display = 'none';
   // Hide institution view
   const instView = document.getElementById('inst-view');
   if (instView) { instView.style.display = 'none'; instView.classList.remove('active'); }
   // Hide all tool grids
   document.querySelectorAll('#tools-view .tool-grid').forEach(g => g.style.display = 'none');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showModelo() {
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('tools-view').style.display = 'none';
+  const instView = document.getElementById('inst-view');
+  if (instView) { instView.style.display = 'none'; instView.classList.remove('active'); }
+  document.getElementById('modelo-view').style.display = 'block';
+  document.getElementById('modelo-view').classList.add('active');
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
