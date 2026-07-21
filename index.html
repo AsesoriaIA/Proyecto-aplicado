@@ -696,6 +696,42 @@ footer {
 .validacion-step h4 { font-size: 14px; color: var(--navy); margin-bottom: 6px; }
 .validacion-step p { font-size: 12px; color: var(--gray-dark); line-height: 1.5; }
 
+/* Ética IA */
+.etica-box {
+  background: white;
+  border-radius: var(--radius);
+  padding: 36px;
+  box-shadow: var(--shadow);
+  margin-top: 40px;
+  border-left: 6px solid var(--gold);
+}
+.etica-box h2 { font-size: 22px; color: var(--navy); margin-bottom: 16px; text-align: center; }
+.etica-box .intro { text-align: center; color: var(--gray-dark); margin-bottom: 24px; font-size: 14px; }
+.etica-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.etica-item {
+  background: var(--gray);
+  border-radius: var(--radius-sm);
+  padding: 22px 18px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.etica-item .etica-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 42px;
+  text-align: center;
+}
+.etica-item h4 { font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+.etica-item p { font-size: 12px; color: var(--gray-dark); line-height: 1.5; }
+@media (max-width: 768px) {
+  .etica-grid { grid-template-columns: 1fr; }
+}
+
 /* GEM Integration */
 .gem-integration {
   background: linear-gradient(135deg, var(--green), #00a870);
@@ -1921,6 +1957,41 @@ REGLAS:
         <div class="validacion-step"><div class="step-num">1</div><h4>Juicio de expertos</h4><p>El asesor de investigación revisa prompts, guías y sitio web antes del piloto.</p></div>
         <div class="validacion-step"><div class="step-num">2</div><h4>Validación por uso</h4><p>Los docentes evalúan el sitio y la GEM durante los 3 talleres mediante formularios.</p></div>
         <div class="validacion-step"><div class="step-num">3</div><h4>Encuesta post-piloto</h4><p>Cuestionario de 16 preguntas sobre satisfacción, utilidad y cambios en la práctica docente.</p></div>
+      </div>
+    </div>
+
+    <div class="etica-box">
+      <h2>⚖️ Uso ético de la IA</h2>
+      <p class="intro">La ética no es un anexo del modelo: es una dimensión constitutiva del mismo</p>
+      <div class="etica-grid">
+        <div class="etica-item">
+          <div class="etica-icon">🔒</div>
+          <div>
+            <h4>Privacidad y datos sensibles</h4>
+            <p>No se incluyen nombres reales de estudiantes, números de identificación ni datos biométricos en los prompts. Se utilizan seudónimos en los ejercicios prácticos.</p>
+          </div>
+        </div>
+        <div class="etica-item">
+          <div class="etica-icon">⚖️</div>
+          <div>
+            <h4>Responsabilidad docente</h4>
+            <p>La IA es una herramienta de apoyo, no un sustituto del criterio profesional. Toda planeación o PIAR generado con IA debe ser revisado y validado por el docente antes de su aplicación.</p>
+          </div>
+        </div>
+        <div class="etica-item">
+          <div class="etica-icon">🔍</div>
+          <div>
+            <h4>Revisión de sesgos</h4>
+            <p>Los prompts incluyen indicaciones para evitar estereotipos. Durante los talleres se forma a los docentes para identificar y ajustar críticamente posibles sesgos en las respuestas de la IA.</p>
+          </div>
+        </div>
+        <div class="etica-item">
+          <div class="etica-icon">📖</div>
+          <div>
+            <h4>Transparencia y documentación</h4>
+            <p>Todos los prompts del modelo están documentados y disponibles. Las fuentes, herramientas y procesos son trazables para garantizar la replicabilidad del modelo.</p>
+          </div>
+        </div>
       </div>
     </div>
 
