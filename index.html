@@ -557,6 +557,7 @@ footer {
   .nav-links { display: none; }
   .hamburger { display: block; }
   .mobile-menu { top: 60px; }
+  .nota-aclaratoria { font-size: 13px; padding: 12px 14px; margin: 12px 0; }
   .hero { padding: 90px 16px 50px; }
   .hero h1 { font-size: 24px; }
   .hero p { font-size: 14px; }
@@ -892,6 +893,20 @@ footer {
   color: var(--green-dark); display: inline-block; margin-top: 4px; word-break: break-all;
 }
 
+.nota-aclaratoria {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 1px solid #f59e0b;
+  border-left: 4px solid #f59e0b;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: #92400e;
+  line-height: 1.6;
+}
+.nota-aclaratoria strong { color: #78350f; }
+.nota-aclaratoria .nota-icon { font-size: 20px; margin-right: 8px; }
+
 /* === PROMPT EDITABLE === */
 .prompt-editor-box { background: white; border: 2px solid var(--cyan); border-radius: var(--radius); overflow: hidden; margin-top: 16px; }
 .prompt-editor-header {
@@ -1115,6 +1130,11 @@ footer {
 <section id="tools-view" class="tool-section">
   <div class="tool-container">
     <button class="back-btn" onclick="showDashboard()">← Volver al inicio</button>
+
+    <div class="nota-aclaratoria">
+      <span class="nota-icon">📌</span>
+      <strong>Importante:</strong> Los prompts que encontrarás aquí son <strong>ejemplos</strong> pensados para primaria. Antes de usarlos, <strong>edítalos</strong> según tu contexto: grado, área, temática, número de estudiantes y diagnósticos individuales. ¡Tú conoces mejor a tus estudiantes!
+    </div>
 
     <!-- ChatGPT -->
     <div id="tool-chatgpt" class="tool-grid" style="display:none">
