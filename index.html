@@ -953,6 +953,7 @@ footer {
   <div class="nav-links">
     <a href="#" onclick="showDashboard()">Inicio</a>
     <a href="#" onclick="showModelo()">🧠 El Modelo</a>
+      <a href="#" onclick="showBancoPrompts()">📚 Banco</a>
     <div class="inst-dropdown">
       <button class="inst-dropbtn">🏫 Instituciones</button>
       <div class="inst-dropdown-content">
@@ -2074,11 +2075,21 @@ function showDashboard() {
   document.getElementById('tools-view').style.display = 'none';
   document.getElementById('modelo-view').classList.remove('active');
   document.getElementById('modelo-view').style.display = 'none';
+  document.getElementById('banco-view').style.display = 'none';
   // Hide institution view
   const instView = document.getElementById('inst-view');
   if (instView) { instView.style.display = 'none'; instView.classList.remove('active'); }
   // Hide all tool grids
   document.querySelectorAll('#tools-view .tool-grid').forEach(g => g.style.display = 'none');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function showBancoPrompts() {
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('tools-view').style.display = 'none';
+  document.getElementById('modelo-view').style.display = 'none';
+  document.getElementById('banco-view').style.display = 'none';
+  document.getElementById('banco-view').style.display = 'block';
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
@@ -2224,6 +2235,27 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
+
+
+
+<!-- ===== BANCO DE PROMPTS ===== -->
+<section id="banco-view" style="display:none; padding:80px 20px 60px; max-width:1100px; margin:0 auto;">
+  <button onclick="showDashboard()" style="display:inline-flex;align-items:center;gap:6px;background:white;border:1px solid #ddd;padding:8px 16px;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:24px;color:#213460;font-weight:500;">← Volver al inicio</button>
+  <h2 style="text-align:center;color:#213460;margin-bottom:10px;">📚 Banco de Prompts por Necesidad</h2>
+  <p style="text-align:center;color:#64748b;margin-bottom:30px;">Encuentra el prompt exacto según lo que necesitas crear. Todos usan <strong>ROL + CONTEXTO + TAREA + FORMATO + RESTRICCIONES</strong>.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📝 Planeación</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Asesor DUA. Diseña planeación para [grado], [área], [tema]. 4 momentos con actividad+estrategia+recurso+adaptación DUA, rúbrica 3×4, adaptaciones. Materiales accesibles. Cita DBA del MEN."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📄 Ficha de Actividad</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Diseñador didáctico. Ficha B/N para [grado] sobre [tema]. Instrucciones con pictogramas, 3-4 ejercicios, espacio para dibujar, autoevaluación 😊 😐 😞."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📋 PIAR / Inclusión</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Especialista Decreto 1421. PIAR para [grado] con [diagnóstico]: valoración, ajustes por área (mín 4), recursos, cronograma, acta de acuerdo."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📊 Evaluación</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Evaluador. Prueba de [período] para [grado], [área]. 10 preguntas variadas + clave + rúbrica 3×4. Versión adaptada para barreras de lectoescritura."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">🎵 Canción</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Compositor infantil. Canción sobre [tema] para [grado], ritmo [cumbia/vallenato]. Estribillo ×3, 2 estrofas, cierre. Referencia a Colombia."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">🎨 Infografía</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Diseñador. Infografía sobre [tema] para [grado]. 4-5 bloques (ícono + máx 15 palabras), 1 dato curioso. Vertical, colores vibrantes."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📊 Presentación</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Diseñador PPT. 7 diapositivas sobre [tema] para [grado]: portada, pregunta, 3 ideas clave, actividad, conexión Colombia, cierre."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📚 Guía</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Diseñador de guías. Guía de [tema] para [grado]: EXPLORAR, PRACTICAR, CREAR, EVALUAR. Pictogramas, glosario, rúbrica."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📖 Cuento</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Escritor infantil colombiano. Cuento 4-5 párrafos sobre [tema] para [grado]. Personajes colombianos, enseñanza. 5 preguntas de comprensión."</p></div>
+    <div style="background:white;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:20px;"><h4 style="color:#213460;">📑 Informe</h4><p style="font-size:12px;color:#64748b;margin:8px 0;">"ROL: Docente. Informe descriptivo de [estudiante], [grado], período [X]. Fortalezas, áreas en proceso, recomendaciones. Lenguaje constructivo."</p></div>
+  </div>
+</section>
 
 </body>
 </html>
