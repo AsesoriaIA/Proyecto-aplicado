@@ -1039,132 +1039,35 @@ footer {
         </div>
       </div>
       <div class="card-body">
-        <p>Prompts organizados por lo que necesitas crear: planeación, ficha, PIAR, evaluación, canción, infografía, presentación y más. Encuentra el prompt exacto para tu momento.</p>
+        <p>Prompts organizados por lo que necesitas crear: planeación, ficha, PIAR, evaluación, canción, infografía, presentación y más.</p>
       </div>
       <div class="card-footer">
         <span>📝 Planeación · 📄 Ficha · 📋 PIAR · 📊 Prueba · 🎵 Canción · 🎨 Infografía</span>
         <span>→</span>
       </div>
     </div>
-  </div>
-</nav>
 
-<!-- ===== MOBILE MENU ===== -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#" onclick="closeMobileMenu(); showDashboard()">🏠 Inicio</a>
-  <a href="#" onclick="closeMobileMenu(); showModelo()">🧠 El Modelo</a>
-  <button class="mobile-link" onclick="toggleMobileSub('mobileInst')">🏫 Instituciones ▾</button>
-  <div class="mobile-sub" id="mobileInst">
-    <a href="#" onclick="closeMobileMenu(); showInstitution('alfonso')">
-      <div>
-        <strong>I.E. Técnica Alfonso López Pumarejo</strong><br>
-        <span class="inst-loc">📍 Turbaco, Bolívar</span>
+    
+  
+
+    <!-- Card 4: Banco de Prompts -->
+    <div class="card fade-in" onclick="showBancoPrompts()">
+      <div class="card-header">
+        <div class="icon plan">📚</div>
+        <div>
+          <h3>Banco de Prompts</h3>
+          <div class="count">10 necesidades</div>
+        </div>
       </div>
-    </a>
-    <a href="#" onclick="closeMobileMenu(); showInstitution('benedikta')">
-      <div>
-        <strong>I.E. Benedikta Zur Nieden</strong><br>
-        <span class="inst-loc">📍 Itagüí, Antioquia</span>
+      <div class="card-body">
+        <p>Prompts organizados por lo que necesitas crear: planeación, ficha, PIAR, evaluación, canción, infografía, presentación y más.</p>
       </div>
-    </a>
-    <a href="#" onclick="closeMobileMenu(); showInstitution('maria_teresa')">
-      <div>
-        <strong>IED María Teresa Ortiz Nueva</strong><br>
-        <span class="inst-loc">📍 Madrid, Cundinamarca</span>
+      <div class="card-footer">
+        <span>📝 Planeación · 📄 Ficha · 📋 PIAR · 📊 Prueba · 🎵 Canción · 🎨 Infografía</span>
+        <span>→</span>
       </div>
-    </a>
-  </div>
-  <button class="mobile-link" onclick="toggleMobileSub('mobileTools')">🛠️ Herramientas ▾</button>
-  <div class="mobile-sub" id="mobileTools">
-    <a href="#" onclick="closeMobileMenu(); showTools('chatgpt')">🤖 ChatGPT</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('claude')">🧠 Claude</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('gemini')">🌀 Gemini</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('deepseek')">🔍 Deepseek</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('copilot')">💻 Copilot</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('notebooklm')">📓 NotebookLM</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('perplexity')">🔎 Perplexity</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('canva')">🎨 Canva IA</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('gamma')">📊 Gamma</a>
-    <a href="#" onclick="closeMobileMenu(); showTools('suno')">🎵 Suno AI</a>
   </div>
 </div>
-
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="hero-badge">🧪 Proyecto Aplicado · Maestría UTB</div>
-  <h1>Asesoría Docente <span>con IA</span></h1>
-  <p>Un espacio diseñado para que los docentes de colegios públicos encuentren herramientas, tutoriales, prompts y recursos de inteligencia artificial que faciliten su planeación de clase, atención a la diversidad y trabajo diario.</p>
-  <a class="gem-btn" href="https://gemini.google.com/gem/1ilyb7PcKftUNfrHRb6YsJ1uSHwT0l_B_?usp=sharing" target="_blank">🤖 Accede a nuestra Gema en Gemini</a>
-</section>
-
-<!-- ===== ABOUT ===== -->
-<section class="about">
-  <div class="container">
-    <h2>¿Qué es este sitio?</h2>
-    <p>Somos un equipo de docentes-investigadores de la <strong>Universidad Tecnológica de Bolívar</strong> que creamos este espacio para reunir, en un solo lugar, las mejores herramientas de inteligencia artificial aplicadas a la labor docente. Aquí encontrarás <strong>tutoriales claros</strong>, <strong>prompts listos para usar</strong> y una <strong>Gema de Gemini</strong> personalizada que te ayudará a planear tus clases con enfoque inclusivo (DUA), crear fichas, canciones, infografías, evaluaciones y PIAR. Todo pensado para docentes que no son expertos en tecnología. 💚</p>
-  </div>
-</section>
-
-<!-- ===== DASHBOARD - CATEGORÍAS ===== -->
-<section id="dashboard">
-  <h2 class="section-title fade-in">Explora las herramientas</h2>
-  <p class="section-sub fade-in">Selecciona una categoría y descubre tutoriales, prompts y recursos para cada IA</p>
-
-  <div class="cards-grid">
-    <!-- Card 1 -->
-    <div class="card fade-in" onclick="showCategory('plan')">
-      <div class="card-header">
-        <div class="icon plan">📝</div>
-        <div>
-          <h3>Para planear y crear</h3>
-          <div class="count">5 herramientas</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <p>ChatGPT, Claude, Gemini, Deepseek y Copilot. Ideales para crear planeaciones, fichas, evaluaciones, PIAR y todo el material que necesitas para tu clase.</p>
-      </div>
-      <div class="card-footer">
-        <span>🤖 ChatGPT · Claude · Gemini · Deepseek · Copilot</span>
-        <span>→</span>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="card fade-in" onclick="showCategory('invest')">
-      <div class="card-header">
-        <div class="icon invest">🔍</div>
-        <div>
-          <h3>Para investigar</h3>
-          <div class="count">2 herramientas</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <p>NotebookLM y Perplexity. Perfectas para buscar información con fuentes verificadas, resumir documentos, crear podcasts educativos y preparar tus clases con datos confiables.</p>
-      </div>
-      <div class="card-footer">
-        <span>📓 NotebookLM · 🔎 Perplexity</span>
-        <span>→</span>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="card fade-i onclick="showBancoPrompts()"n" onclick="showCategory('design')">
-      <div class="card-header">
-        <div class="icon design">🎨</div>
-        <div>
-          <h3>Para diseñar</h3>
-          <div class="count">3 herramientas</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <p>Canva IA, Gamma y Suno AI. Crea infografías, presentaciones impactantes y canciones educativas originales para tus estudiantes de primaria.</p>
-      </div>
-      <div class="card-footer">
-        <span>🎨 Canva IA · 📊 Gamma · 🎵 Suno AI</span>
-        <span>→</span>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ===== TOOLS VIEW (hidden by default) ===== -->
