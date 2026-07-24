@@ -455,6 +455,30 @@ nav {
 }
 .tool-info .ref a { color: var(--blue); text-decoration: none; }
 .tool-info .ref a:hover { text-decoration: underline; }
+
+/* === BANCO DE PROMPTS === */
+.banco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+#banco-view .tool-card .tool-info { padding: 16px 18px; }
+#banco-view .tool-card .tool-info .desc { font-size: 13px; color: var(--gray-dark); margin-bottom: 10px; }
+#banco-view .more-prompts { margin-top: 8px; border-top: 1px dashed #d0d8e5; padding-top: 10px; }
+#banco-view .more-prompts .label { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+#banco-view .more-prompts .mini-box {
+  background: #f8fafc; border: 1px solid #e8ecf2; border-radius: 6px;
+  padding: 8px 10px; margin-bottom: 6px; font-size: 11px; line-height: 1.4;
+  color: #334155; font-family: 'Courier New', monospace; cursor: pointer;
+  transition: all 0.2s;
+}
+#banco-view .more-prompts .mini-box:hover { border-color: var(--green); background: #f0faf5; }
+#banco-view .more-prompts .mini-box .tag {
+  display: inline-block; font-size: 9px; font-weight: 700;
+  background: var(--green-light); color: var(--green);
+  padding: 1px 8px; border-radius: 4px; margin-right: 6px;
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
 .go-chat {
   display: inline-flex;
   align-items: center;
@@ -1123,7 +1147,25 @@ footer {
         <span>→</span>
       </div>
     </div>
-  </div>
+
+    <!-- Card 4: Banco de Prompts -->
+    <div class="card fade-in" onclick="showBancoPrompts()">
+      <div class="card-header">
+        <div class="icon plan">📚</div>
+        <div>
+          <h3>Banco de Prompts</h3>
+          <div class="count">10 necesidades</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Prompts organizados por lo que necesitas crear: planeación, ficha, PIAR, evaluación, canción, infografía, presentación y más. Encuentra el prompt exacto para tu momento.</p>
+      </div>
+      <div class="card-footer">
+        <span>📝 Planeación · 📄 Ficha · 📋 PIAR · 📊 Prueba · 🎵 Canción · 🎨 Infografía</span>
+        <span>→</span>
+      </div>
+    </div>
+  </div>  </div>
 </section>
 
 <!-- ===== TOOLS VIEW (hidden by default) ===== -->
@@ -1142,18 +1184,36 @@ footer {
         <div class="tool-top"><span class="emoji">🤖</span><h4>ChatGPT</h4><span class="free">Gratis</span></div>
         <a href="https://chat.openai.com" target="_blank" class="chat-btn">💬 Habla con ChatGPT</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/8dfOAzaGREQ" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Tutorial completo en español: cómo usar ChatGPT para crear planeaciones, actividades, evaluaciones y más. Ideal para docentes principiantes.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">"Eres un docente experto en DUA. Diseña una planeación de clase para [grado], área Matemáticas, tema 'Sumas con llevadas', duración 2 horas. Incluye: propósito, momentos de clase con tiempos, adaptaciones para estudiantes con NEE, y una rúbrica de evaluación."</div>
+          <div class="prompt-box">ROL: Eres un asesor pedagógico experto en DUA (CAST 2018) y educación inclusiva en Colombia. Conoces los DBA del MEN, el Decreto 1421/2017 y estrategias de enseñanza diferenciada para aulas diversas.
+
+CONTEXTO: Docente de colegio público colombiano, grado [grado], área [área]. Aula con estudiantes de distintos ritmos de aprendizaje. Modelo: [constructivista / Nueva Escuela / Ausubel].
+
+TAREA: Diseña una planeación de clase completa para "[tema]", duración [X] horas, con enfoque DUA (representación, acción-expresión y motivación).
+
+FORMATO DE ENTREGA:
+1. ENCABEZADO (área, grado, docente, IE, fecha, modelo pedagógico)
+2. PROPÓSITO + 3 indicadores de logro medibles
+3. SABERES PREVIOS (actividad concreta, 5-10 min)
+4. MOMENTOS (exploración → desarrollo → aplicación → cierre), cada uno con: actividad, estrategia, recurso, adaptación DUA
+5. EVIDENCIA (producto tangible del estudiante)
+6. RÚBRICA (3 criterios × 4 niveles: inicial-básico-alto-superior)
+7. ADAPTACIONES (TDAH, discapacidad cognitiva, barreras lectoescritura, talentos excepcionales)
+
+RESTRICCIONES: Lenguaje claro. Materiales accesibles y de bajo costo. Mínimo 2 estrategias de aprendizaje activo. Cita el DBA específico del MEN. NO uses tablas vacías ni contenido genérico. Adapta vocabulario al grado (lúdico para primaria).</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=8dfOAzaGREQ" target="_blank">Andrés Villalba · Guía ChatGPT para Docentes</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">📝 FICHA B/N</span>"Crea una ficha imprimible en BLANCO Y NEGRO para [grado], área Matemáticas, tema 'Sumas con llevadas'. Contornos gruesos para colorear. Instrucciones paso a paso, espacio para escribir, auto-evaluación con 😊"</div>
-            <div class="mini-box"><span class="tag">📋 PIAR</span>"Elabora un PIAR según Decreto 1421/2017 para un estudiante de [grado] con discapacidad intelectual leve. Incluye valoración pedagógica, ajustes por área, recursos y acta de compromiso."</div>
-            <div class="mini-box"><span class="tag">📊 PRUEBA</span>"Diseña una prueba de [período] para [grado], área Ciencias Sociales, tema 'Mi familia y mi comunidad'. 8 preguntas: selección múltiple, dibujo, escritura breve. Incluye rúbrica y clave."</div>
-            <div class="mini-box"><span class="tag">🎨 INFOGRÁFICA</span>"Describe una infografía sobre 'El ciclo del agua' para [grado]. Formato vertical, 4 bloques con íconos, un dato curioso y 3 palabras clave. Incluye versión en texto plano."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"ROL: Eres un docente de primaria experto en didáctica de las matemáticas. CONTEXTO: Colombia, grado [grado], tema [tema]. TAREA: Diseña una ficha imprimible en BLANCO Y NEGRO con 6-8 ejercicios progresivos (de lo simple a lo complejo). Incluye: instrucciones paso a paso, un ejemplo resuelto, espacio para que el estudiante dibuje su estrategia, y autoevaluación con 😊 😐 😞. FORMATO: Título llamativo, espacio para nombre y fecha. RESTRICCIONES: Usa material concreto colombiano (monedas, frutas del Caribe, pasos de cumbia). No más de 2 páginas."</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"ROL: Eres un divulgador científico especializado en primera infancia. CONTEXTO: Colombia, grado [grado], tema [tema]. TAREA: Diseña una guía de experimento científico con 3 partes: (1) pregunta generadora adaptada a su edad, (2) procedimiento con materiales caseros (vinagre, bicarbonato, plantas, agua), (3) registro de observación con dibujo y escritura. FORMATO: Ficha imprimible en blanco y negro. RESTRICCIONES: Todos los materiales deben conseguirse en una tienda de barrio colombiana. Incluye pictogramas para estudiantes que aún no leen fluidamente."</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"ROL: Eres un cientista social y pedagogo experto en enseñanza de la historia y geografía colombiana. CONTEXTO: grado [grado], tema [tema], ubicación [región/departamento]. TAREA: Diseña una secuencia de 3 actividades conectadas: (1) exploración de saberes previos a través de una historia o anécdota local, (2) construcción colectiva con mapa, línea de tiempo o árbol genealógico, (3) producción individual donde el estudiante relacione el tema con su comunidad. FORMATO: Guía imprimible con instrucciones claras. RESTRICCIONES: Incluye referentes culturales de la región (fiestas, comidas, lugares). Promueve el respeto por la diversidad étnica y cultural."</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"ROL: Eres un especialista en didáctica de la lectoescritura para primaria. CONTEXTO: Colombia, grado [grado], tipo de texto [cuento / fábula / carta / instructivo]. TAREA: Diseña una actividad de producción textual con estos momentos: (1) lectura de un texto modelo corto, (2) planificación guiada (personajes, lugar, problema), (3) escritura del borrador con conectores sugeridos, (4) reescritura y dibujo. FORMATO: Ficha de 2 páginas en blanco y negro. RESTRICCIONES: Usa letra grande y renglones anchos. Incluye banco de palabras. Cita el DBA de Lenguaje correspondiente al grado."</div>
+            <div class="mini-box"><span class="tag">📋 PIAR / INCLUSIÓN</span>"ROL: Eres un psicopedagogo experto en educación inclusiva y normativa colombiana. CONTEXTO: Decreto 1421/2017, grado [grado], diagnóstico [discapacidad / TDAH / TEA / dislexia]. TAREA: Elabora un PIAR que incluya: (1) valoración pedagógica del estudiante con fortalezas y barreras, (2) ajustes razonables por área (mínimo 3 áreas), (3) recursos humanos, técnicos y materiales requeridos, (4) acta de acuerdo con compromisos de docente, familia y estudiante. RESTRICCIONES: NO uses nombres reales. Lenguaje profesional pero accesible para la familia. Cita artículos del Decreto 1421 que respaldan cada ajuste."</div>
           </div>
+          <a href="https://chat.openai.com" target="_blank" class="go-chat">🚀 Ir a ChatGPT</a>
+        </div></div>
           <a href="https://chat.openai.com" target="_blank" class="go-chat">🚀 Ir a ChatGPT</a>
         </div>
       </div>
@@ -1165,18 +1225,34 @@ footer {
         <div class="tool-top"><span class="emoji">🧠</span><h4>Claude (Anthropic)</h4><span class="free">Gratis</span></div>
         <a href="https://claude.ai" target="_blank" class="chat-btn">💬 Habla con Claude</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/CmmLH307Dow" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Aprende paso a paso cómo usar Claude AI. Excelente para redactar planeaciones detalladas, crear letras de canciones educativas y generar documentos largos con lenguaje natural.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">"Eres un compositor de canciones infantiles. Escribe una canción sobre la fotosíntesis para [grado], estilo cumbia colombiana, con estribillo pegajoso. Incluye referencias a la región Caribe."</div>
+          <div class="prompt-box">ROL: Eres un compositor de canciones infantiles y experto en pedagogía musical para primaria. Conoces ritmos colombianos (cumbia, vallenato, mapalé, bambuco) y su aplicación educativa.
+
+CONTEXTO: Docente de [grado] en colegio público colombiano. Necesita una canción para enseñar el tema "[tema]" del área [área] de forma lúdica y memorable.
+
+TAREA: Compón una canción educativa original con esta estructura:
+• TÍTULO (pegajoso y relacionado con el tema)
+• ESTRIBILLO (4 versos que se repiten, máximo 8 palabras por verso)
+• 3 ESTROFAS (cada una desarrolla un concepto clave)
+• RIMA consonante o asonante, ritmo marcado
+• Duración estimada: 2-3 minutos
+
+FORMATO: Entrega la letra completa con indicaciones entre paréntesis para el ritmo: "(ritmo de cumbia)", "(más lento)", "(todos cantan)". Al final, sugiere 3 gestos o movimientos corporales que acompañen la canción.
+
+RESTRICCIONES: Vocabulario adecuado a la edad. Incluye al menos una referencia a la región Caribe o cultura colombiana. NO uses palabras en inglés forzadas. La letra debe funcionar sin acompañamiento instrumental (a capela).</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=CmmLH307Dow" target="_blank">Facundo Corengia · Tutorial Claude AI</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">📝 FICHA</span>"Crea una ficha sobre 'Los animales de la granja' para [grado], área Ciencias Naturales. Incluye dibujos para colorear, unir con flechas y escribir el nombre. Versión BLANCO Y NEGRO."</div>
-            <div class="mini-box"><span class="tag">🎵 CANCIÓN</span>"Escribe la letra de una canción estilo ronda infantil sobre 'Los números del 1 al 10' para [grado]. Estribillo pegajoso, rimas sencillas, mencione elementos colombianos."</div>
-            <div class="mini-box"><span class="tag">📋 PIAR</span>"Redacta un PIAR para estudiante de [grado] con TEA (Trastorno del Espectro Autista). Fortalezas: memoria visual. Barreras: interacción social, cambios de rutina. Ajustes concretos por área."</div>
-            <div class="mini-box"><span class="tag">📚 LECTURA</span>"Crea un cuento corto sobre 'La importancia del reciclaje' para [grado]. Vocabulario sencillo, 3 párrafos, con preguntas de comprensión lectora al final."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"ROL: Eres un escritor de literatura infantil y profesor de matemáticas. TAREA: Escribe un cuento de 3 párrafos donde los personajes resuelvan problemas de [tema matemático]. Cada párrafo termina con una pregunta que el estudiante debe resolver. Incluye un desenlace divertido con moraleja. CONTEXTO: grado [grado], colegio público colombiano. RESTRICCIONES: Números y operaciones adaptadas al grado. Usa contextos cotidianos (tienda, feria, cocina)."</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"ROL: Eres un divulgador científico infantil. TAREA: Redacta un texto expositivo de 4 párrafos sobre [tema] adaptado a [grado]. Cada párrafo desarrolla una idea central y termina con una pregunta de comprensión. Incluye 3 palabras de vocabulario científico con su definición sencilla. FORMATO: Texto en lenguaje coloquial pero preciso. Agrega una tabla de '¿Sabías que...?' con 3 datos curiosos."</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"ROL: Eres un narrador de historias y profesor de ciencias sociales. TAREA: Crea un relato histórico sobre [tema] narrado desde la perspectiva de un niño o niña de la época. Extensión: 5 párrafos. Incluye descripciones de la vida cotidiana (comida, vestimenta, juegos). Finaliza con una reflexión que conecte el pasado con el presente. RESTRICCIONES: Rigor histórico adaptado al grado. Lenguaje cercano y vivencial."</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"ROL: Eres un cuentacuentos y profesor de lenguaje. TAREA: Escribe un cuento original de 4 párrafos para [grado] que ejemplifique [tema literario: fábula, leyenda, mito, anécdota]. Incluye: personajes con nombres colombianos, un problema o conflicto claro, y una enseñanza explícita. Al final, 5 preguntas de comprensión lectora (2 literales, 2 inferenciales, 1 crítica)."</div>
+            <div class="mini-box"><span class="tag">📋 PIAR / INCLUSIÓN</span>"ROL: Eres un psicopedagogo con experiencia en inclusión educativa. TAREA: Redacta el informe pedagógico de un PIAR para estudiante de [grado] con [diagnóstico]. El informe debe tener: descripción del estudiante en positivo (fortalezas primero), barreras identificadas por área, ajustes implementados con evidencia de su efectividad, y recomendaciones para el siguiente período. RESTRICCIONES: Lenguaje constructivo, centrado en capacidades. Extensión máxima: 2 páginas."</div>
           </div>
+          <a href="https://claude.ai" target="_blank" class="go-chat">🚀 Ir a Claude</a>
+        </div></div>
           <a href="https://claude.ai" target="_blank" class="go-chat">🚀 Ir a Claude</a>
         </div>
       </div>
@@ -1188,18 +1264,34 @@ footer {
         <div class="tool-top"><span class="emoji">🌀</span><h4>Gemini (Google)</h4><span class="free">Gratis</span></div>
         <a href="https://gemini.google.com" target="_blank" class="chat-btn">💬 Habla con Gemini</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/71a1BnP6h3c" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Conoce Gemini, la IA de Google. Perfecta para crear materiales educativos, integrar con Google Classroom y usar la Gema personalizada que creamos para docentes colombianos.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">"Crea una ficha de actividad imprimible para [grado], área Ciencias Naturales, tema 'Los animales de la región Caribe'. Versión: BLANCO Y NEGRO (para colorear). Incluye instrucciones, actividad principal y auto-evaluación con caritas."</div>
+          <div class="prompt-box">ROL: Eres un diseñador de material didáctico para primaria en Colombia. Experto en DUA (CAST 2018) y en crear fichas accesibles para aulas con estudiantes de diversos ritmos de aprendizaje.
+
+CONTEXTO: Docente de [grado], área [área], tema "[tema]". IE pública colombiana. Los estudiantes tienen acceso limitado a fotocopias a color. Algunos están en proceso de lectoescritura.
+
+TAREA: Diseña una ficha de actividad IMPRIMIBLE EN BLANCO Y NEGRO (escala de grises, contornos definidos) que incluya:
+1. TÍTULO llamativo
+2. INSTRUCCIONES con pictogramas (íconos simples al lado de cada paso)
+3. ACTIVIDAD PRINCIPAL: ejercicio concreto adaptado al tema y grado
+4. ESPACIO PARA DIBUJAR (recuadro con la indicación "Dibuja lo que aprendiste")
+5. AUTOEVALUACIÓN con 3 caritas (😊 😐 😞) y una frase para completar: "Hoy aprendí..."
+
+FORMATO: Tamaño carta (letter), márgenes generosos, letra grande (mínimo 14pt equivalente), renglones con espacio suficiente para escribir con lápiz.
+
+RESTRICCIONES: NO uses colores (solo blanco, negro y grises). Cada sección debe estar claramente delimitada con bordes gruesos. Usa máximo 2 tipografías. Contornos aptos para colorear.</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=71a1BnP6h3c" target="_blank">Curso Prompt Engineering · YouTube</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">📝 FICHA B/N</span>"Diseña una ficha en BLANCO Y NEGRO sobre 'Las vocales' para [grado]. Trazos punteados para repasar, dibujos para colorear, espacio para escribir cada vocal. Instrucciones con pictogramas."</div>
-            <div class="mini-box"><span class="tag">🎨 INFOGRÁFICA</span>"Describe una infografía sobre 'El sistema solar' para [grado]. Estilo colorido, planetas con datos curiosos, escala de tamaños. Incluye versión en texto plano para discapacidad visual."</div>
-            <div class="mini-box"><span class="tag">📊 PRUEBA</span>"Crea una prueba de [período] para [grado], área Matemáticas, DBA de pensamiento numérico. 10 preguntas sobre suma, resta y conteo. Incluye rúbrica y adaptaciones."</div>
-            <div class="mini-box"><span class="tag">📋 GUÍA</span>"Elabora una guía de trabajo para [grado] sobre 'Las plantas'. 3 actividades: colorear partes de la planta, escribir sus funciones, y un experimento sencillo con una semilla."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Diseña una ficha de conteo y series para [grado]. Incluye: 2 ejercicios de conteo con dibujos para colorear (grupos de objetos), 2 series numéricas para completar (ascendente y descendente), y 1 ejercicio de correspondencia uno a uno (unir con línea). Todo en BLANCO Y NEGRO, con pictogramas en las instrucciones."</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Crea una ficha de observación y registro para [grado] sobre [tema]. Estructura: (1) Dibujo grande del objeto de estudio con sus partes señaladas por flechas, (2) tabla de 3 columnas: 'Observo', 'Pienso', 'Pregunto', (3) espacio para dibujar el antes y después (si es un experimento o proceso). Blanco y negro."</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Diseña una ficha sobre 'Mi comunidad' para [grado]. Incluye: (1) espacio para dibujar un lugar importante del barrio/vereda, (2) 4 preguntas guía (¿cómo se llama mi barrio? ¿quiénes viven conmigo? ¿qué lugares visito? ¿qué fiesta celebramos?), (3) actividad de unir con línea: profesión con herramienta (campesino-azada, pescador-atarraya, etc. según la región). Blanco y negro, letra grande."</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Crea una ficha de escritura creativa para [grado] con tema [tema]. Incluye: (1) imagen grande para colorear como disparador, (2) banco de 10 palabras relacionadas, (3) 3 preguntas guía para planificar (¿quién?, ¿dónde?, ¿qué pasó?), (4) espacio pautado para escribir 4-6 oraciones, (5) espacio para dibujar la escena. Blanco y negro."</div>
+            <div class="mini-box"><span class="tag">📋 GUÍA COMPLETA</span>"Elabora una guía de trabajo autónomo para [grado] sobre [tema] con 3 actividades progresivas: (1) EXPLORAR: colorear, señalar, nombrar partes, (2) PRACTICAR: completar, clasificar, relacionar, (3) CREAR: dibujar una situación nueva aplicando lo aprendido. Incluye instrucciones con pictogramas, glosario de 5 palabras clave y rúbrica de 3 criterios."</div>
           </div>
+          <a href="https://gemini.google.com" target="_blank" class="go-chat">🚀 Ir a Gemini</a>
+        </div></div>
           <a href="https://gemini.google.com" target="_blank" class="go-chat">🚀 Ir a Gemini</a>
         </div>
         <!-- TUTORIAL GEM -->
@@ -1262,98 +1354,51 @@ footer {
               <h4>🤖 Prompt — Planeación con IA</h4>
               <button class="copy-btn" onclick="copyPrompt()">📋 Copiar prompt</button>
             </div>
-            <textarea class="prompt-textarea" id="prompt-planeacion">Eres un asesor pedagógico experto en educación colombiana. Tu función es ayudar a docentes de instituciones educativas públicas a crear planeaciones de clase completas, detalladas y alineadas con los estándares del MEN.
+            <textarea class="prompt-textarea" id="prompt-planeacion">ROL: Eres "Profe IA", un asesor pedagógico virtual especializado en el sistema educativo colombiano. Tu función es acompañar a docentes de colegios públicos en la creación de planeaciones de clase completas, inclusivas y alineadas con los referentes del MEN.
 
-INSTRUCCIONES GENERALES:
-- Responde SIEMPRE en español con lenguaje claro y profesional.
-- Adapta la planeación al grado, área y contexto de la institución.
-- Incluye enfoque diferencial y atención a la diversidad.
-- Usa formato limpio con encabezados, listas y tablas.
-- Si el docente no especifica el grado, pregunta antes de generar.
+PERFIL PROFESIONAL:
+- Dominas los DBA (Derechos Básicos de Aprendizaje) de todas las áreas y grados
+- Conoces los Estándares Básicos de Competencias del MEN
+- Eres experto en DUA (Diseño Universal para el Aprendizaje) según CAST (2018)
+- Aplicas el Decreto 1421 de 2017 para inclusión y PIAR
+- Conoces los modelos pedagógicos de las 3 IE del proyecto:
+  • Alfonso López (Turbaco): Constructivista Cognitivo (Piaget, Vygotsky, Ausubel)
+  • Benedikta Zur Nieden (Itagüí): Nueva Escuela (Aprendizaje colaborativo, Freire)
+  • María Teresa Ortiz (Madrid): Constructivista — Aprendizaje Significativo (Ausubel)
 
-MODELO PEDAGÓGICO:
-[SELECCIONA EL MODELO DE TU INSTITUCIÓN]
+CÓMO DEBES RESPONDER:
+✅ Lenguaje claro y profesional, pero cálido y cercano
+✅ Adapta el vocabulario al grado (lúdico para primaria, técnico para secundaria)
+✅ Siempre incluye 3 tipos de adaptación DUA: representación, acción-expresión y motivación
+✅ Cita DBA y estándares del MEN cuando sea relevante
+✅ Sugiere materiales concretos y accesibles (bajo costo, conseguibles en cualquier papelería colombiana)
+❌ NO uses nombres reales de estudiantes en ejemplos
+❌ NO generes contenido genérico sin sustento pedagógico
+❌ NO asumas que todos los estudiantes tienen internet o dispositivos en casa
 
-Opción A — Constructivista Cognitivo (Piaget, Vygotsky, Ausubel):
-"El estudiante construye conocimiento a partir de sus esquemas previos. Usa organizadores previos, zona de desarrollo próximo (Vygotsky) y aprendizaje significativo (Ausubel). La clase debe incluir activación de conocimientos previos, construcción guiada y aplicación autónoma."
-
-Opción B — Nueva Escuela:
-"El estudiante es actor principal de su aprendizaje. Trabajo colaborativo, autogestión, aprendizaje por proyectos y resolución de problemas. La guía se estructura por periodos de 12 semanas con momentos A (exploración), B (desarrollo), C (integración) y D (evaluación)."
-
-Opción C — Constructivista Ausubel:
-"El aprendizaje es significativo cuando se conecta con la estructura cognitiva previa. Usa organizadores previos, aprendizaje por recepción significativa, principios de asimilación y diferenciación progresiva. Evaluación diagnóstica, formativa y final."
-
-FORMATO DE PLANEACIÓN:
-Genera la planeación con esta estructura:
-
-1. ENCABEZADO
-- Área/Asignatura:
-- Grado:
-- Docente: [el docente escribirá su nombre]
-- Periodo/Semana/Fecha:
-- Institución Educativa:
-- Modelo Pedagógico:
-
-2. PROPÓSITO DE APRENDIZAJE / DESEMPEÑO
-- Objetivo general del tema
-- Indicadores de logro específicos
-
-3. APRENDIZAJES (Conceptual / Procedimental / Actitudinal)
-- Conceptual: [qué debe saber]
-- Procedimental: [qué debe saber hacer]
-- Actitudinal: [cómo debe comportarse]
-- DBA (Desempeño por Ámbito) si aplica
-
-4. ORGANIZADOR PREVIO
-- Actividad breve para activar conocimientos previos (5-10 min)
-
-5. MOMENTOS DE LA CLASE
-
-   M1 — EXPLORACIÓN / MOTIVACIÓN (15-20 min)
-   - Actividad concreta
-   - Estrategia pedagógica
-   - Recursos necesarios
-
-   M2 — ESTRUCTURACIÓN / DESARROLLO (30-40 min)
-   - Actividad concreta
-   - Estrategia pedagógica
-   - Recursos necesarios
-
-   M3 — APLICACIÓN / PRÁCTICA (20-30 min)
-   - Actividad concreta
-   - Estrategia pedagógica
-   - Recursos necesarios
-
-   M4 — CIERRE / EVALUACIÓN (10-15 min)
-   - Actividad concreta
-   - Instrumento de evaluación
-   - Preguntas de reflexión
-
-6. EVIDENCIAS DE APRENDIZAJE
-- Entregable concreto del estudiante
-- Rúbrica breve o criterios de evaluación
-
-7. RECURSOS
-- Lista de materiales necesarios (digitales y físicos)
-
-8. ATENCIÓN A LA DIVERSIDAD
-- Adaptaciones para estudiantes con PIAR
-- Estrategias para diferentes ritmos de aprendizaje
-- Inclusión de perspectiva de género y étnica
-
-9. REALIMENTACIÓN
-- Lo que más me gustó de la clase fue...
-- Sugiero mejorar...
-- Para la próxima clase sería interesante...
+FORMATO DE PLANEACIÓN QUE DEBES USAR:
+1. ENCABEZADO (área, grado, docente, IE, fecha, período, modelo pedagógico)
+2. PROPÓSITO DE APRENDIZAJE + 3 indicadores de logro medibles
+3. SABERES PREVIOS (actividad concreta, 5-10 min)
+4. MOMENTOS DE CLASE (exploración → desarrollo → aplicación → cierre), cada uno con:
+   - Actividad concreta (qué hacen estudiantes y docente)
+   - Estrategia pedagógica (por qué funciona)
+   - Recursos necesarios (lista específica)
+   - Adaptación DUA (para estudiantes con barreras)
+5. EVIDENCIA DE APRENDIZAJE (producto tangible)
+6. RÚBRICA (3 criterios × 4 niveles: inicial-básico-alto-superior)
+7. ADAPTACIONES (TDAH, discapacidad cognitiva, barreras lectoescritura, talentos excepcionales)
+8. REALIMENTACIÓN (espacio para que el estudiante reflexione)
 
 REGLAS ADICIONALES:
-- Si el docente pide una clase específica, genera la planeación completa de una sola vez.
-- Si pide un periodo completo, genera un resumen semanal con los temas principales.
-- Siempre incluye al menos 3 estrategias de aprendizaje activo.
-- Incluye referentes normativos del MEN cuando sea relevante (DBA, Estándares, CPE).
-- Adapta el vocabulario al grado: más lúdico en primaria, más técnico en secundaria/media.
+- Si el docente no especifica grado o área, PREGUNTA antes de generar
+- Si pide un período completo, genera resumen semanal con temas y actividades clave
+- Siempre incluye al menos 2 estrategias de aprendizaje activo
+- Menciona la conexión con el contexto colombiano (región, cultura, actualidad)
+- Las rúbricas deben tener descriptores específicos, no solo etiquetas
+- Prioriza trabajo colaborativo (parejas, grupos pequeños) sobre trabajo individual
 
-¿En qué grado, área y tema quieres que te genere la primera planeación?</textarea>
+¿En qué grado, área y tema quieres que te ayude hoy?</textarea>
             <div class="prompt-tip">
               ⚡ <strong>Tip:</strong> Antes de copiar, reemplaza los textos entre corchetes [ ] con tu información. Si no sabes qué modelo pedagógico usa tu IE, revisa la sección de <a href="#" onclick="showInstitution('alfonso'); return false;" style="color:#92400e; font-weight:600;">Instituciones</a> en el menú superior.
             </div>
@@ -1369,18 +1414,33 @@ REGLAS ADICIONALES:
         <div class="tool-top"><span class="emoji">🔍</span><h4>Deepseek</h4><span class="free">Gratis</span></div>
         <a href="https://chat.deepseek.com" target="_blank" class="chat-btn">💬 Habla con Deepseek</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/UAuMVP8NeyA" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Deepseek es una IA gratuita con excelente razonamiento. Ideal para crear PIAR, documentos normativos y tareas que requieren precisión y estructura lógica.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">"Redacta un PIAR completo según Decreto 1421 de 2017 para un estudiante de [grado] con diagnóstico de TDAH. Fortalezas: creatividad, expresión oral. Barreras: atención sostenida, lectoescritura. Incluye ajustes por área, recursos y acta de acuerdo."</div>
+          <div class="prompt-box">ROL: Eres un profesional en educación inclusiva con dominio del Decreto 1421 de 2017, la Convención sobre los Derechos de las Personas con Discapacidad (ONU 2006) y la Ley 1618 de 2013. Conoces los protocolos del MEN para PIAR y DUA.
+
+CONTEXTO: Institución educativa pública colombiana. Estudiante de [grado] con diagnóstico de [diagnóstico]. El docente necesita elaborar el PIAR (Plan Individual de Ajustes Razonables) para garantizar su derecho a una educación inclusiva de calidad.
+
+TAREA: Redacta un PIAR completo que incluya:
+1. DATOS DEL ESTUDIANTE (sin nombres reales: usar "Estudiante A")
+2. VALORACIÓN PEDAGÓGICA (fortalezas, intereses, estilo de aprendizaje y barreras específicas)
+3. AJUSTES RAZONABLES POR ÁREA (mínimo 4 áreas: Matemáticas, Lenguaje, Ciencias Naturales, Ciencias Sociales), cada ajuste especificando: tipo (curricular, metodológico, evaluativo, de acceso), descripción concreta, recurso requerido, responsable
+4. RECURSOS HUMANOS, TÉCNICOS Y MATERIALES (con costos estimados realistas para IE pública)
+5. CRONOGRAMA DE SEGUIMIENTO (3 cortes en el año escolar con indicadores)
+6. ACTA DE ACUERDO (compromisos del docente, la familia y el estudiante)
+
+RESTRICCIONES: Cita artículos específicos del Decreto 1421/2017 (ej: Art. 2.3.3.5.2.1.4 sobre ajustes razonables). Lenguaje profesional pero comprensible para la familia. NO uses datos personales reales. Todo en español de Colombia.</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=UAuMVP8NeyA" target="_blank">Guía Deepseek para principiantes</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">📋 PIAR DETALLADO</span>"Redacta un PIAR completo para [grado] con diagnóstico de dislexia. Especifica ajustes en lectura, escritura y evaluación. Incluye apoyos tecnológicos sugeridos y compromiso familiar."</div>
-            <div class="mini-box"><span class="tag">📊 PRUEBA</span>"Diseña una prueba de período para [grado], área Lenguaje, DBA de comprensión lectora. Un texto corto + 5 preguntas de diferentes niveles (literal, inferencial, crítico). Con rúbrica."</div>
-            <div class="mini-box"><span class="tag">📝 ADAPTACIÓN</span>"Toma esta guía de Ciencias Sociales para [grado] y adapta su lenguaje y actividades para un estudiante de [grado] con discapacidad cognitiva leve que está en proceso de lecto-escritura."</div>
-            <div class="mini-box"><span class="tag">📑 FORMATO</span>"Crea un formato de seguimiento académico para un estudiante con PIAR. Tabla mensual con: área, meta, logro alcanzado, observaciones y firma del docente."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Diseña una prueba adaptada de matemáticas para [grado] dirigida a un estudiante con [discapacidad/barrera]. La prueba debe evaluar el mismo DBA que sus compañeros pero con: instrucciones con pictogramas, menos ítems por página, ejercicios con apoyo visual (dibujos, gráficos), formato de respuesta simplificado (marcar con X, unir con línea). Incluye rúbrica de evaluación diferenciada y recomendaciones para la aplicación."</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Elabora un Plan de Adecuación Curricular (PAC) para el área de Ciencias Naturales, [grado], tema [tema]. Especifica: DBA que se abordarán, aprendizajes esperados con y sin adaptación, metodología diferenciada (DUA: representación, acción-expresión, motivación), recursos concretos, y criterios de evaluación flexibles. Cita los Estándares Básicos de Competencias del MEN."</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Redacta un informe descriptivo de desempeño para un estudiante de [grado] en el área de Ciencias Sociales durante el [período]. Estructura: (1) logros alcanzados con evidencia concreta, (2) aspectos en proceso con estrategias de apoyo sugeridas, (3) recomendaciones para la familia con actividades cotidianas, (4) acuerdos para el siguiente período. Lenguaje constructivo y esperanzador."</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Construye una rúbrica analítica para evaluar producción textual en [grado] que contemple 3 niveles de desempeño (inicial, en proceso, consolidado) para estudiantes con y sin PIAR. Criterios: (1) coherencia y organización de ideas, (2) uso de vocabulario, (3) aspectos formales de escritura, (4) creatividad. Incluye descriptores específicos para cada nivel y adaptaciones sugeridas."</div>
+            <div class="mini-box"><span class="tag">📑 FORMATO SEGUIMIENTO</span>"Crea un formato de seguimiento a PIAR para un año escolar completo. Debe incluir: una tabla por período académico con columnas para: área, ajuste implementado, fecha, evidencia observada, efectividad (alta/media/baja), ajustes necesarios, firma del docente. Agrega espacio para observaciones cualitativas al final de cada período. Formato: hoja tamaño carta, apaisado."</div>
           </div>
+          <a href="https://chat.deepseek.com" target="_blank" class="go-chat">🚀 Ir a Deepseek</a>
+        </div></div>
           <a href="https://chat.deepseek.com" target="_blank" class="go-chat">🚀 Ir a Deepseek</a>
         </div>
       </div>
@@ -1392,18 +1452,36 @@ REGLAS ADICIONALES:
         <div class="tool-top"><span class="emoji">💻</span><h4>Microsoft Copilot</h4><span class="free">Gratis</span></div>
         <a href="https://copilot.microsoft.com" target="_blank" class="chat-btn">💬 Habla con Copilot</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/d-CuF6dlqLg" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Copilot viene integrado con Office 365 (Word, Excel, PowerPoint). Muchos colegios públicos ya tienen acceso. Ideal para crear documentos, presentaciones y análisis de datos educativos.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">"Crea una presentación de 5 diapositivas sobre el ciclo del agua para [grado]. Incluye: definición, etapas (con dibujos sugeridos), dato curioso y una actividad práctica para el aula."</div>
+          <div class="prompt-box">ROL: Eres un diseñador de presentaciones educativas con conocimiento de pedagogía visual y los estándares del MEN. Sabes que en primaria las diapositivas deben ser visuales, con poco texto y elementos interactivos.
+
+CONTEXTO: Docente de [grado] en colegio público colombiano. Prepara una clase sobre "[tema]" del área [área]. La presentación se proyectará en un TV o video beam del aula.
+
+TAREA: Diseña el guion de una presentación de 7 diapositivas con esta estructura:
+1. PORTADA (título + imagen sugerida + grado)
+2. ¿QUÉ SABEMOS? (pregunta generadora con imagen)
+3. CONTENIDO CLAVE 1 (una idea central + ejemplo visual)
+4. CONTENIDO CLAVE 2 (una idea central + ejemplo visual)
+5. ACTIVIDAD INTERACTIVA (pregunta para responder en voz alta o en cuaderno)
+6. DATO CURIOSO O CONEXIÓN CON COLOMBIA
+7. CIERRE (resumen en 3 palabras + compromiso)
+
+FORMATO: Para cada diapositiva escribe: (a) título sugerido, (b) texto principal (máximo 20 palabras), (c) imagen sugerida [entre corchetes], (d) nota para el docente: qué decir mientras se muestra esta diapositiva.
+
+RESTRICCIONES: Una idea por diapositiva. Texto mínimo, imagen máximo. Tono cálido y cercano. Incluye al menos una referencia cultural colombiana. Adapta vocabulario al grado.</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=d-CuF6dlqLg" target="_blank">Microsoft Copilot Tutorial</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">📊 PRESENTACIÓN</span>"Crea 8 diapositivas sobre 'La Independencia de Colombia' para [grado]. Diapositivas visuales, una idea por slide, imagen sugerida en cada una. Tono: educativo-narrativo."</div>
-            <div class="mini-box"><span class="tag">📝 PLANEACIÓN</span>"Escribe un plan de clase para [grado] sobre 'El cuidado del agua', duración 1 hora. Incluye cuento corto, experimento práctico, compromiso en casa y evaluación oral."</div>
-            <div class="mini-box"><span class="tag">📋 INFORME</span>"Redacta un informe descriptivo de [período] para un estudiante de [grado] que avanza lentamente en lectoescritura pero participa activamente en matemáticas. Lenguaje constructivo."</div>
-            <div class="mini-box"><span class="tag">📚 GUÍA</span>"Crea una guía de repaso para [grado], área Ciencias Naturales, tema 'Los ecosistemas'. 4 actividades: clasificar ecosistemas, dibujar cadena alimenticia, sopa de letras y preguntas."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Diseña 5 diapositivas para enseñar [tema matemático] en [grado]. Estructura: (1) situación cotidiana que requiera matemáticas (ej: repartir empanadas, contar frutas), (2) concepto con apoyo visual (dibujo o diagrama), (3) ejemplo paso a paso resuelto, (4) ejercicio para practicar juntos, (5) desafío individual. Incluye sugerencias de imágenes para cada diapositiva."</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Prepara 6 diapositivas sobre [tema de ciencias] para [grado]. Estructura: (1) pregunta intrigante, (2) concepto principal con imagen de la naturaleza colombiana, (3) proceso o ciclo visual (usar diagrama), (4) experimento o demostración para hacer en clase, (5) relación con la vida cotidiana del estudiante, (6) ¿qué aprendiste? con espacio para dibujar en el cuaderno."</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Crea una presentación de 6 diapositivas sobre [tema de ciencias sociales] para [grado]. Estructura: (1) título con imagen de un lugar o personaje colombiano, (2) mapa con ubicación (departamento, municipio), (3) línea de tiempo con 3-4 hitos, (4) ¿cómo era la vida antes? comparación con dibujos, (5) ¿cómo se relaciona conmigo? conexión personal, (6) actividad: entrevista a un adulto de la familia."</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Diseña 5 diapositivas para una clase de ortografía sobre [tema] para [grado]. Estructura: (1) regla ortográfica con ejemplo y contraejemplo visual, (2) palabras que cumplen la regla (con imágenes), (3) palabras tramposas (excepciones), (4) juego de corrección: ¿cuál está bien escrita? (3 pares de palabras), (5) reto: escribe 3 oraciones usando la regla."</div>
+            <div class="mini-box"><span class="tag">📊 INFORME PADRES</span>"Redacta el guion de una presentación para reunión de padres de familia de [grado], período [X]. 5 diapositivas: (1) bienvenida y agenda, (2) logros del grupo con datos positivos, (3) áreas de mejora con estrategias concretas, (4) recomendaciones para apoyar en casa (3 ideas prácticas), (5) espacio para preguntas y agradecimiento. Tono cálido, lenguaje claro, sin tecnicismos."</div>
           </div>
+          <a href="https://copilot.microsoft.com" target="_blank" class="go-chat">🚀 Ir a Copilot</a>
+        </div></div>
           <a href="https://copilot.microsoft.com" target="_blank" class="go-chat">🚀 Ir a Copilot</a>
         </div>
       </div>
@@ -1415,18 +1493,29 @@ REGLAS ADICIONALES:
         <div class="tool-top"><span class="emoji">📓</span><h4>NotebookLM (Google)</h4><span class="free">Gratis</span></div>
         <a href="https://notebooklm.google.com" target="_blank" class="chat-btn">💬 Abre NotebookLM</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/6zM77qiNxLc" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">NotebookLM es un cuaderno de investigación con IA. Sube documentos, PDFs, videos y la IA los analiza, resume y genera podcasts educativos automáticamente.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">Sube el PDF de los DBA del MEN a NotebookLM y pregúntale: "Resume los DBA de Ciencias Naturales para [grado] y sugiere 3 actividades prácticas para cada uno, con materiales que se consiguen en cualquier colegio público."</div>
+          <div class="prompt-box">ROL: Eres un investigador pedagógico experto en currículo colombiano. Sabes extraer, analizar y sintetizar información de documentos oficiales del MEN.
+
+CONTEXTO: Docente de [grado] que necesita comprender y aplicar los DBA, mallas curriculares y estándares del MEN para el área de [área]. Subirá documentos oficiales a NotebookLM.
+
+TAREA (después de subir los documentos): "Analiza los DBA de [área] para [grado] que están en estos documentos. Para cada DBA, sugiere: (1) una actividad concreta para el aula con materiales accesibles en colegios públicos, (2) una forma de evaluarlo que no sea solo prueba escrita, (3) una adaptación para estudiantes con barreras de aprendizaje. Resume todo en una tabla."
+
+FORMATO: Pide la respuesta en tabla con columnas: DBA | Actividad | Evaluación | Adaptación DUA.
+
+RESTRICCIONES: Las actividades deben requerir máximo 3 materiales. Tiempo estimado por actividad: 20-40 minutos. Prioriza actividades colaborativas y lúdicas para primaria.</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=6zM77qiNxLc" target="_blank">Tutorial NotebookLM · YouTube</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">📚 DBA</span>"Sube el PDF de los DBA de Lenguaje para [grado] y pregúntale: 'Resume los DBA de escritura y sugiere 3 actividades prácticas para cada uno con materiales del aula.'"</div>
-            <div class="mini-box"><span class="tag">🎙️ PODCAST</span>"Sube un artículo o PDF sobre un tema de clase. Pídele a NotebookLM: 'Genera un podcast educativo de 3 minutos explicando este tema como si fuera una clase para niños de primaria.'"</div>
-            <div class="mini-box"><span class="tag">📋 GUÍA</span>"Sube 3 documentos (DBA, malla curricular, texto de referencia) y pregúntale: 'Crea una guía de estudio para el período 2 de Ciencias Naturales, [grado], con actividades por cada DBA.'"</div>
-            <div class="mini-box"><span class="tag">📝 RESUMEN</span>"Sube un texto largo del MEN y pídele: 'Resume este documento en máximo 3 párrafos para compartir con los padres de familia en reunión.'"</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Sube el PDF de los DBA de Matemáticas del MEN. Pregunta: 'Para [grado], resume los DBA de pensamiento numérico y sugiere 3 actividades con material concreto (fichas, tapas, palitos) que funcionen en un aula con 35+ estudiantes. Incluye una actividad de evaluación diagnóstica rápida (5 min).'"</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Sube los DBA de Ciencias Naturales + un artículo sobre educación ambiental en Colombia. Pregunta: 'Crea una guía de 3 sesiones para [grado] sobre [tema] que integre los DBA con la realidad ambiental de [región]. Cada sesión debe tener: objetivo, actividad práctica con materiales reciclados y pregunta de reflexión.'"</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Sube los DBA de Ciencias Sociales + los Estándares Básicos de Competencias Ciudadanas. Pregunta: 'Diseña una secuencia de 4 actividades para [grado] sobre [tema] que forme competencias ciudadanas mientras enseña el contenido curricular. Incluye una actividad que involucre a las familias.'"</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Sube los DBA de Lenguaje + un cuento infantil colombiano (PDF). Pregunta: 'Genera un plan de 2 clases para [grado] usando este cuento como texto base. Clase 1: comprensión lectora (antes, durante y después de leer). Clase 2: producción textual a partir del cuento. Cita los DBA específicos que abordas.'"</div>
+            <div class="mini-box"><span class="tag">🎙️ PODCAST</span>"Sube tu planeación del período o los DBA del área. Pide: 'Genera un podcast educativo de 3-4 minutos explicando [tema] como si fuera una clase para niños de [grado] de un colegio público colombiano. Tono cálido y entusiasta, con 2 ejemplos cotidianos y una pregunta final para reflexionar.'"</div>
           </div>
+          <a href="https://notebooklm.google.com" target="_blank" class="go-chat">🚀 Ir a NotebookLM</a>
+        </div></div>
           <a href="https://notebooklm.google.com" target="_blank" class="go-chat">🚀 Ir a NotebookLM</a>
         </div>
       </div>
@@ -1438,18 +1527,27 @@ REGLAS ADICIONALES:
         <div class="tool-top"><span class="emoji">🔎</span><h4>Perplexity AI</h4><span class="free">Gratis</span></div>
         <a href="https://www.perplexity.ai" target="_blank" class="chat-btn">💬 Busca con Perplexity</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/SpUHNrxGyso" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Perplexity es un buscador inteligente que te da respuestas con fuentes verificadas. Perfecto para preparar clases con información actualizada y confiable.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">"¿Cuáles son las mejores estrategias para enseñar fracciones en [grado] de primaria? Dame 5 actividades concretas con materiales accesibles para colegios públicos colombianos. Incluye fuentes."</div>
+          <div class="prompt-box">ROL: Eres un docente-investigador colombiano buscando las mejores estrategias didácticas basadas en evidencia para tu aula.
+
+CONTEXTO: Enseñas [área] en [grado] de un colegio público colombiano. Buscas estrategias efectivas, accesibles y contextualizadas para enseñar "[tema]". Tus estudiantes tienen acceso limitado a tecnología en casa pero muchas ganas de aprender.
+
+TAREA (copia y pega en Perplexity): "¿Cuáles son las 5 estrategias más efectivas para enseñar [tema] en [grado] de primaria según investigaciones recientes? Para cada estrategia quiero: (1) descripción breve, (2) ejemplo concreto de aplicación en un aula colombiana, (3) materiales necesarios (de bajo costo), (4) evidencia de efectividad. Incluye fuentes académicas o del MEN."
+
+RESTRICCIONES: Prioriza fuentes en español o de América Latina. Si mencionas tecnología, sugiere alternativas sin conexión a internet. Las actividades deben funcionar con grupos de 30-40 estudiantes.</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=SpUHNrxGyso" target="_blank">Tutorial Perplexity AI Español</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">🔎 INVESTIGAR</span>"Mejores estrategias para enseñar multiplicación en [grado] en colegios públicos colombianos. Dame 5 actividades con materiales reciclados o de bajo costo. Incluye fuentes académicas."</div>
-            <div class="mini-box"><span class="tag">📚 CLASE</span>"¿Cómo explicar el ciclo del agua a niños de 2°? Dame un guion de clase paso a paso con experimentos caseros, canciones sugeridas y evaluación lúdica. Con fuentes."</div>
-            <div class="mini-box"><span class="tag">📋 PROYECTO</span>"Ideas para un proyecto de aula sobre 'La biodiversidad colombiana' para [grado]. Que integre Ciencias, Lenguaje y Artística. Con ejemplos de otras escuelas públicas."</div>
-            <div class="mini-box"><span class="tag">🎯 DBA</span>"¿Cuáles son los DBA actualizados de Matemáticas para [grado] en Colombia? Dame ejemplos de cómo evaluar cada uno con actividades cotidianas del aula."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Busca en Perplexity: 'Estrategias efectivas para enseñar [tema matemático] en [grado] de primaria con materiales concretos y juegos. Dame 4 actividades detalladas que usen objetos cotidianos (tapas, palillos, frutas, monedas colombianas). Incluye la progresión: de lo concreto a lo abstracto. Fuentes: preferiblemente de universidades latinoamericanas o el MEN.'"</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Pregunta en Perplexity: '¿Cómo explicar [tema de ciencias] a niños de [grado] con experimentos caseros? Necesito 3 experimentos con: materiales de cocina o reciclados, procedimiento paso a paso, explicación científica sencilla para niños, y una pregunta para que los estudiantes formulen hipótesis. Incluye fuentes verificadas.'"</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Consulta en Perplexity: 'Historia de [tema/región colombiana] adaptada para niños de [grado]. Quiero: 5 datos interesantes con fuentes, 2 historias o leyendas de la tradición oral de la región, 3 personajes históricos destacados (incluir mujeres y afrocolombianos), y una actividad sugerida para trabajar identidad cultural en el aula.'"</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Pregunta en Perplexity: 'Métodos efectivos para enseñar [habilidad lectoescritora] en [grado] según investigaciones en educación. Dame: 4 estrategias con descripción y ejemplo, 3 juegos de lenguaje que funcionen en aulas numerosas, una lista de 5 libros infantiles de autores colombianos o latinoamericanos recomendados para esa edad. Con fuentes académicas.'"</div>
+            <div class="mini-box"><span class="tag">🔎 PROYECTO</span>"Busca en Perplexity: 'Experiencias de proyectos de aula sobre [tema] en colegios públicos de Colombia o América Latina. Quiero: 2 ejemplos reales con resultados, dificultades comunes y cómo las resolvieron, recursos utilizados, y recomendaciones para implementar algo similar en una IE pública con presupuesto limitado. Incluye enlaces a las experiencias documentadas.'"</div>
           </div>
+          <a href="https://www.perplexity.ai" target="_blank" class="go-chat">🚀 Ir a Perplexity</a>
+        </div></div>
           <a href="https://www.perplexity.ai" target="_blank" class="go-chat">🚀 Ir a Perplexity</a>
         </div>
       </div>
@@ -1461,18 +1559,29 @@ REGLAS ADICIONALES:
         <div class="tool-top"><span class="emoji">🎨</span><h4>Canva + IA</h4><span class="free">Gratis</span></div>
         <a href="https://www.canva.com" target="_blank" class="chat-btn">🎨 Abre Canva</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/UkzVLHeSf7c" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Canva ahora tiene Magic Studio con inteligencia artificial. Crea infografías, fichas, carteles y presentaciones en segundos. Ideal para diseñar materiales visuales para tu clase.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">Usa el prompt del Módulo 4 (Infografías) de la GEM, pégalo en ChatGPT y luego lleva la descripción a Canva. O directamente en Canva: "Infografía educativa sobre el sistema solar para [grado], tonos azules, con dibujos grandes y texto mínimo."</div>
+          <div class="prompt-box">ROL: Eres un diseñador gráfico especializado en material educativo para primaria. Conoces los principios de diseño visual para niños: colores vibrantes pero no saturados, tipografías legibles, íconos reconocibles, jerarquía visual clara.
+
+CONTEXTO: Docente de [grado] que necesita crear un recurso visual para su clase de [área] sobre "[tema]". El material se usará en un aula colombiana, posiblemente impreso o proyectado.
+
+PASO 1 (en ChatGPT, Claude o Gemini): "Describe detalladamente un [tipo: infografía / cartel / ficha visual] sobre '[tema]' para [grado]. Incluye: paleta de colores sugerida (máximo 4), 5 elementos visuales con su descripción, texto exacto para cada sección (máximo 15 palabras por sección), y distribución espacial (qué va arriba, centro, abajo)."
+
+PASO 2 (en Canva): Abre Canva → Magic Studio → "Generar diseño" y pega la descripción del Paso 1. O bien, escribe directamente: "[tipo de diseño] educativo sobre [tema] para niños de [grado], colores [paleta], estilo infantil pero limpio, íconos grandes, texto mínimo."
+
+RESTRICCIONES: Texto en español. Fuentes sans-serif redondeadas. Contraste alto (fondo claro, texto oscuro). Tamaño mínimo de letra: 18pt para impresión, 28pt para proyección.</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=UkzVLHeSf7c" target="_blank">Tutorial Completo Canva 2024</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">🎨 INFOGRÁFICA</span>"Infografía educativa sobre 'Los derechos de los niños' para [grado]. 5 derechos con un ícono cada uno. Colores vivos, fondo blanco, letra grande. Tamaño cartel 50x70cm."</div>
-            <div class="mini-box"><span class="tag">📝 FICHA</span>"Ficha de actividad sobre 'Las sumas con llevadas' para [grado]. 8 operaciones, espacio para resolver, dibujo para colorear al final. Diseño infantil pero limpio."</div>
-            <div class="mini-box"><span class="tag">📊 CARTEL</span>"Cartel motivacional para el salón de clase: 'Normas del aula' con 5 reglas ilustradas. Cada regla con un ícono diferente. Colores alegres, fondo claro."</div>
-            <div class="mini-box"><span class="tag">📋 HORARIO</span>"Diseña un horario visual de clases para [grado]. Cada materia con un ícono: Matemáticas 🔢, Lenguaje 📖, Ciencias 🌿, etc. Formato para imprimir y pegar en el salón."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Infografía paso a paso sobre [tema matemático] para [grado]. 4 bloques: (1) concepto con ejemplo visual (dibujo), (2) procedimiento en 3 pasos con íconos, (3) ejemplo resuelto, (4) tip o truco para recordar. Colores: azul y naranja sobre fondo blanco. Letra grande. Formato cartel 50x70 cm para pegar en el salón."</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Cartel del [tema de ciencias] para [grado]. Diseño: ilustración central grande con flechas señalando las partes, cada parte con una etiqueta de máximo 3 palabras. En la parte inferior, 3 datos curiosos con íconos. Colores: verde naturaleza, azul cielo, fondo crema. Tamaño carta para imprimir y pegar en el cuaderno."</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Cartel interactivo sobre [tema social] para [grado]. Diseño: mapa o línea de tiempo central, 5 elementos clave señalados con íconos, preguntas en globos de diálogo ('¿Sabías que...?'). Colores: tonos tierra (terracota, mostaza, verde oliva). Incluye el escudo o bandera de Colombia si es pertinente."</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Ficha visual de [tema de lenguaje] para [grado]. Diseño: 1 regla o concepto en el centro con letra grande, 4 ejemplos alrededor con dibujos, sección 'Practica' con 2 ejercicios breves. Todo en 1 página tamaño carta. Blanco y negro para fotocopiar, pero con buen contraste y recuadros definidos."</div>
+            <div class="mini-box"><span class="tag">🎨 AULA</span>"Diseña un cartel de 'Normas del Aula' para [grado] con 5 reglas. Cada regla: frase positiva en máximo 5 palabras ('Levanto la mano para hablar'), un ícono grande y color distintivo. Estilo: infantil, alegre, colores pastel. Incluye el nombre del curso y espacio para que cada estudiante firme o ponga su huella."</div>
           </div>
+          <a href="https://www.canva.com" target="_blank" class="go-chat">🎨 Ir a Canva</a>
+        </div></div>
           <a href="https://www.canva.com" target="_blank" class="go-chat">🎨 Ir a Canva</a>
         </div>
       </div>
@@ -1484,18 +1593,35 @@ REGLAS ADICIONALES:
         <div class="tool-top"><span class="emoji">📊</span><h4>Gamma AI</h4><span class="free">Gratis</span></div>
         <a href="https://gamma.app" target="_blank" class="chat-btn">📊 Abre Gamma</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/sHkrkt-a_vE" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Gamma crea presentaciones impactantes con solo escribir el tema. Ideal para preparar clases visuales, presentaciones para reuniones de padres y materiales para tus estudiantes.</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">"Crea una presentación sobre 'La Independencia de Colombia' para [grado]. 8 diapositivas, estilo visual, incluye fechas clave, personajes principales y una línea de tiempo. Tono: educativo, para niños de primaria."</div>
+          <div class="prompt-box">ROL: Eres un diseñador de experiencias de aprendizaje visual para audiencias infantiles. Sabes que los niños de primaria aprenden mejor con imágenes, historias y participación activa.
+
+CONTEXTO: Docente de [grado] en colegio público colombiano. Prepara una presentación interactiva para su clase de [área] sobre "[tema]". La presentación se usará como apoyo visual mientras el docente guía la clase.
+
+TAREA (pega en Gamma): "Crea una presentación educativa de 8 diapositivas sobre [tema] para [grado]. Estructura:
+1. Portada con título atractivo y grado
+2. Pregunta generadora con imagen impactante
+3-4-5. Tres ideas clave, cada una con: título, imagen sugerida, máximo 15 palabras
+6. Actividad: 'Voltéate y cuéntale a tu compañero...' (think-pair-share)
+7. Conexión con Colombia o la región del estudiante
+8. Cierre: 3 palabras para recordar + compromiso para casa
+
+Estilo: infantil, colores vivos, imágenes grandes, muy poco texto por diapositiva. Tono: 'clase divertida de primaria'. Agrega notas del orador en cada diapositiva con sugerencias para el docente."
+
+RESTRICCIONES: Una idea por diapositiva. Texto mínimo. Cada diapositiva debe incluir una pregunta o interacción. Incluye referentes colombianos (animales, lugares, comidas, tradiciones).</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=sHkrkt-a_vE" target="_blank">Tutorial Gamma AI · YouTube</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">📊 CLASE</span>"Crea una presentación sobre 'Las fracciones' para [grado]. 10 diapositivas: definición con dibujos de pizza, ejemplos visuales, ejercicios interactivos y un juego al final."</div>
-            <div class="mini-box"><span class="tag">🏫 REUNIÓN</span>"Presentación para reunión de padres de familia de [grado]. 6 diapositivas: logros del período, áreas por reforzar, recomendaciones, cronograma y preguntas frecuentes."</div>
-            <div class="mini-box"><span class="tag">📅 PROYECTO</span>"Presentación del proyecto 'La huerta escolar' para [grado]. 8 diapositivas: objetivos, actividades, cronograma, materiales, roles de estudiantes y evaluación."</div>
-            <div class="mini-box"><span class="tag">🎓 DÍA</span>"Presentación para el Día de la Colombianidad. 10 diapositivas sobre símbolos patrios, regiones naturales, comidas típicas y personajes colombianos famosos. Estilo colorido."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Presentación interactiva sobre [tema matemático] para [grado]. 8 diapositivas: (1) situación problema con imagen, (2) ¿qué necesitamos saber?, (3) estrategia 1 con diagrama, (4) estrategia 2 con material concreto, (5) ejemplo resuelto paso a paso, (6) practica con tu compañero, (7) error común (y cómo evitarlo), (8) desafío para casa."</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Presentación visual sobre [tema de ciencias] para [grado]. 7 diapositivas: (1) pregunta misteriosa, (2) concepto clave con foto de la naturaleza colombiana, (3) ¿cómo funciona? (diagrama de proceso), (4) experimento para ver en clase, (5) ¿dónde lo vemos en nuestra región?, (6) dato curioso con fuente, (7) dibuja y explica con tus palabras."</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Presentación sobre [tema social/histórico] para [grado]. 7 diapositivas: (1) imagen antigua vs. actual del lugar, (2) mapa: ¿dónde ocurrió?, (3) protagonistas (incluir mujeres y comunidades), (4) antes y después (cambio), (5) ¿cómo afecta mi vida hoy?, (6) entrevista imaginaria a un personaje, (7) compromiso ciudadano."</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Presentación para clase de [tema de lenguaje] en [grado]. 6 diapositivas: (1) texto modelo corto (cuento, poema, noticia), (2) ¿qué tipo de texto es? (pistas visuales), (3) estructura (partes señaladas con colores), (4) vocabulario nuevo con imágenes, (5) vamos a escribir (consigna guiada), (6) compartimos y celebramos."</div>
+            <div class="mini-box"><span class="tag">👨‍👩‍👧‍👦 PADRES</span>"Presentación para reunión de padres de [grado]. 6 diapositivas: (1) bienvenida con foto del grupo (si hay permiso) o ícono, (2) celebramos: 3 logros del grupo este período, (3) crecemos: 2 áreas de mejora con estrategia, (4) ¿cómo apoyar en casa? 3 ideas concretas sin costo, (5) calendario próximo período, (6) gracias + espacio para preguntas."</div>
           </div>
+          <a href="https://gamma.app" target="_blank" class="go-chat">📊 Ir a Gamma</a>
+        </div></div>
           <a href="https://gamma.app" target="_blank" class="go-chat">📊 Ir a Gamma</a>
         </div>
       </div>
@@ -1507,18 +1633,29 @@ REGLAS ADICIONALES:
         <div class="tool-top"><span class="emoji">🎵</span><h4>Suno AI</h4><span class="free">Gratis</span></div>
         <a href="https://suno.ai" target="_blank" class="chat-btn">🎵 Abre Suno AI</a>
         <div class="tool-video"><iframe src="https://www.youtube.com/embed/t5YhwEA_rHI" allowfullscreen loading="lazy"></iframe></div>
-        <div class="tool-info">
+                  <div class="tool-info">
           <p class="desc">Suno AI genera canciones completas con letra y música a partir de texto. Crea canciones educativas sobre cualquier tema para tus clases. ¡A los niños les encanta!</p>
           <div class="prompt-label">📋 Prompt recomendado</div>
-          <div class="prompt-box">Paso 1: Pide a ChatGPT la letra. Paso 2: Pega en Suno AI. Ejemplo de letra: Canción infantil estilo vallenato sobre las tablas de multiplicar del 2 para [grado]. Estribillo: "Dos por uno es dos, dos por dos es cuatro, ¡multiplicar es fácil, solo practico un rato!"</div>
+          <div class="prompt-box">ROL: Eres un compositor de canciones infantiles educativas que crea letras pegajosas y ritmos bailables con referentes culturales colombianos.
+
+CONTEXTO: Docente de [grado] en colegio público colombiano. Quiere una canción para enseñar "[tema]" del área [área] de forma divertida y memorable. La canción se cantará en clase sin instrumentos profesionales, posiblemente con palmas y movimientos corporales.
+
+PASO 1 (en ChatGPT o Claude): Pide la letra con este prompt: "Escribe la letra de una canción infantil sobre [tema] para [grado]. Estructura: ESTRIBILLO de 4 versos (se repite 3 veces), 2 ESTROFAS de 4 versos cada una, CIERRE de 2 versos. Ritmo sugerido: [cumbia / vallenato / merengue / ronda infantil]. Usa vocabulario adecuado a la edad, rimas sencillas (AABB o ABAB). Incluye al menos una referencia a Colombia."
+
+PASO 2 (en Suno AI): Abre suno.ai, modo "Create", pega la letra completa en el campo de letra. En "Style of music" escribe: "Colombian children's [cumbia/vallenato], upbeat, playful, kids voices, clapping, educational". Haz clic en "Create". Genera 2 versiones y elige la mejor.
+
+RESTRICCIONES: Letra en español. Duración máxima: 2 minutos. El estribillo debe ser repetible a capela. Incluye indicaciones de movimiento entre paréntesis.</div>
           <div class="ref">Referencia: <a href="https://www.youtube.com/watch?v=t5YhwEA_rHI" target="_blank">Tutorial Suno AI · YouTube</a></div>
           <div class="more-prompts">
-            <div class="label">📌 Más prompts para tu día a día:</div>
-            <div class="mini-box"><span class="tag">🔤 VOCALES</span>"Canción infantil estilo ronda sobre las vocales A E I O U para [grado]. Cada vocal con un animal colombiano: A de Armadillo, E de Elefante... Estribillo fácil de repetir."</div>
-            <div class="mini-box"><span class="tag">🌿 NATURALEZA</span>"Canción estilo cumbia sobre 'El cuidado del medio ambiente' para [grado]. Que hable de reciclar, ahorrar agua y cuidar las plantas. Con coro pegajoso y sonidos de la naturaleza."</div>
-            <div class="mini-box"><span class="tag">🔢 TABLAS</span>"Canción estilo merengue sobre la tabla del 2 para [grado]. 2x1=2, 2x2=4... hasta 2x10=20. Que tenga palmadas y ritmo bailable. Estribillo: '¡Dos por uno es dos, así aprendo yo!'"</div>
-            <div class="mini-box"><span class="tag">🇨🇴 PATRIOS</span>"Canción estilo vallenato sobre los símbolos patrios de Colombia para [grado]. La bandera, el escudo, el himno, la palma de cera y el cóndor. Con orgullo colombiano."</div>
+            <div class="label">📌 Más prompts por área:</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Canción infantil sobre [tema: tablas de multiplicar, conteo, sumas, figuras geométricas] para [grado]. Paso 1: Pide a ChatGPT letra estilo [ritmo colombiano] donde el estribillo repita la regla o secuencia. Que incluya 3 ejemplos cantados. Paso 2: En Suno, style: 'Colombian [ritmo], children educational song, counting, playful, clapping rhythm, kids voices.'"</div>
+            <div class="mini-box"><span class="tag">🌿 C. NATURALES</span>"Canción sobre [tema de ciencias: ciclo del agua, fotosíntesis, ecosistemas, cuerpo humano] para [grado]. Paso 1: Pide letra donde cada estrofa explique una etapa o concepto con ejemplos de la naturaleza colombiana (frailejones, cóndor, delfín rosado). Paso 2: Suno style: 'Latin children folk, nature sounds intro, educational, warm vocals, acoustic guitar.'"</div>
+            <div class="mini-box"><span class="tag">🏛️ C. SOCIALES</span>"Canción patriótica/regional sobre [tema: independencia, símbolos patrios, región colombiana, diversidad cultural] para [grado]. Paso 1: Pide letra que mencione lugares, fechas y personajes con orgullo. Incluye nombres de héroes y heroínas. Paso 2: Suno style: 'Colombian folk, bambuco or cumbia, proud and joyful, children choir, traditional instruments.'"</div>
+            <div class="mini-box"><span class="tag">📖 LENGUAJE</span>"Canción sobre [tema: vocales, abecedario, reglas ortográficas, tipos de palabras] para [grado]. Paso 1: Pide letra estilo ronda infantil donde cada estrofa ejemplifique la regla. Usa animales u objetos colombianos para cada letra o ejemplo ('A de Armadillo', 'E de Emeralda'). Paso 2: Suno style: 'Children nursery rhyme, ABC song style, cheerful, simple melody, easy to sing along.'"</div>
+            <div class="mini-box"><span class="tag">🎵 VALORES</span>"Canción sobre [valor: respeto, solidaridad, cuidado del medio ambiente, paz] para [grado]. Paso 1: Pide letra que cuente una mini-historia con moraleja. Personajes con nombres colombianos. Ritmo alegre que invite a bailar en ronda. Paso 2: Suno style: 'Colombian vallenato for kids, heartwarming, acoustic, message of [valor], group singing at chorus.'"</div>
           </div>
+          <a href="https://suno.ai" target="_blank" class="go-chat">🎵 Ir a Suno AI</a>
+        </div></div>
           <a href="https://suno.ai" target="_blank" class="go-chat">🎵 Ir a Suno AI</a>
         </div>
       </div>
@@ -1527,6 +1664,163 @@ REGLAS ADICIONALES:
   </div>
 </section>
 
+
+
+<!-- ===== BANCO DE PROMPTS POR NECESIDAD ===== -->
+<section id="banco-view" class="tool-section">
+  <div class="tool-container">
+    <button class="back-btn" onclick="showDashboard()">← Volver al inicio</button>
+
+    <div class="nota-aclaratoria">
+      <span class="nota-icon">📚</span>
+      <strong>Banco de Prompts por Necesidad:</strong> Encuentra el prompt exacto según el producto que necesitas crear. Todos usan la estructura <strong>ROL + CONTEXTO + TAREA + FORMATO + RESTRICCIONES</strong>. Personaliza los campos entre corchetes.
+    </div>
+
+    <div class="banco-grid">
+
+      <!-- 1. PLANEACIÓN -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📝</span><h4>Planeación de Clase</h4><span class="free">DUA</span></div>
+        <div class="tool-info">
+          <p class="desc">Planeaciones completas con momentos, DBA, adaptaciones DUA y rúbrica. Para cualquier área y grado.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📝 GENERAL</span>"ROL: Asesor pedagógico DUA. CONTEXTO: [grado], [área], [tema], IE pública colombiana. TAREA: Planeación de clase de [X] horas con: propósito, 3 indicadores, saberes previos (5-10 min), momentos (exploración, desarrollo, aplicación, cierre) con actividad + estrategia + recurso + adaptación DUA, evidencia, rúbrica (3 criterios × 4 niveles), adaptaciones (TDAH, discapacidad cognitiva, barreras lectoescritura). FORMATO: Secciones numeradas con viñetas. RESTRICCIONES: Materiales accesibles, mínimo 2 estrategias activas, cita DBA del MEN."</div>
+            <div class="mini-box"><span class="tag">🏛️ CONSTRUCTIVISTA</span>"Agrega al prompt general: MODELO: Constructivista Cognitivo (Piaget, Vygotsky, Ausubel). FORMATO IE: Exploración 30 min → Estructuración 50 min → Práctica/Evaluación 40 min. Incluye organizador previo (Ausubel) y referencias a zona de desarrollo próximo (Vygotsky)."</div>
+            <div class="mini-box"><span class="tag">🌱 NUEVA ESCUELA</span>"Agrega al prompt general: MODELO: Nueva Escuela (Freire, aprendizaje colaborativo). FORMATO: Guía de 12 semanas con Momentos A (exploración), B (desarrollo), C (síntesis), D (evaluación). Énfasis en trabajo colaborativo, autogestión y reflexión crítica del estudiante."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. FICHA DE ACTIVIDAD -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📄</span><h4>Ficha de Actividad</h4><span class="free">Imprimible</span></div>
+        <div class="tool-info">
+          <p class="desc">Fichas en blanco y negro para fotocopiar: ejercicios, dibujos, auto-evaluación con caritas.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📄 FICHA B/N</span>"ROL: Diseñador de material didáctico para primaria en Colombia. CONTEXTO: [grado], [área], [tema]. IE pública, acceso limitado a fotocopias a color. TAREA: Diseña ficha IMPRIMIBLE EN BLANCO Y NEGRO con: (1) título llamativo, (2) instrucciones con pictogramas, (3) 3-4 ejercicios progresivos, (4) espacio para dibujar, (5) autoevaluación con 😊 😐 😞 y frase 'Hoy aprendí...'. FORMATO: Tamaño carta, márgenes generosos, letra grande, contornos gruesos para colorear. RESTRICCIONES: Solo blanco/negro/grises. Máximo 2 páginas."</div>
+            <div class="mini-box"><span class="tag">📐 MATEMÁTICAS</span>"Ficha B/N de [tema matemático] para [grado]. Incluye: 1 ejemplo resuelto, 6 ejercicios progresivos, 1 problema verbal con dibujo, espacio para que el estudiante invente su propio problema. Material concreto sugerido: [tapas, palitos, monedas]. Instrucciones con pictogramas."</div>
+            <div class="mini-box"><span class="tag">📖 LECTOESCRITURA</span>"Ficha B/N de [tema] para [grado]. Incluye: imagen grande para colorear, 3 preguntas guía (¿quién?, ¿dónde?, ¿qué pasó?), banco de 10 palabras, espacio pautado para 4-6 oraciones, glosario visual de 5 palabras."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. PIAR / INCLUSIÓN -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📋</span><h4>PIAR / Inclusión</h4><span class="free">Decreto 1421</span></div>
+        <div class="tool-info">
+          <p class="desc">Planes Individuales de Ajustes Razonables, adecuaciones curriculares e informes de seguimiento.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📋 PIAR COMPLETO</span>"ROL: Profesional en educación inclusiva (Decreto 1421/2017, Ley 1618/2013). CONTEXTO: Estudiante de [grado] con [diagnóstico]. IE pública colombiana. TAREA: PIAR con: (1) datos (sin nombres reales), (2) valoración pedagógica (fortalezas + barreras), (3) ajustes razonables por área (mín 4 áreas, especificar tipo: curricular/metodológico/evaluativo/acceso), (4) recursos requeridos, (5) cronograma de 3 cortes, (6) acta de acuerdo (docente, familia, estudiante). RESTRICCIONES: Cita artículos del Decreto 1421. Lenguaje profesional accesible a la familia."</div>
+            <div class="mini-box"><span class="tag">📊 ADECUACIÓN</span>"ROL: Psicopedagogo escolar. TAREA: Diseña un Plan de Adecuación Curricular para [área], [grado], [tema]. Incluye: DBA que se abordan, aprendizajes esperados (con y sin adaptación), metodología DUA (representación, acción-expresión, motivación), recursos concretos, criterios de evaluación flexibles. Cita los Estándares del MEN."</div>
+            <div class="mini-box"><span class="tag">📑 INFORME</span>"ROL: Docente de apoyo a la inclusión. TAREA: Redacta informe descriptivo de desempeño para estudiante de [grado] con [diagnóstico], período [X]. Estructura: logros con evidencia, aspectos en proceso con estrategias de apoyo, recomendaciones para la familia (3 actividades cotidianas), acuerdos próximo período. Lenguaje constructivo y esperanzador."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. EVALUACIÓN / PRUEBA -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📊</span><h4>Evaluación / Prueba</h4><span class="free">+ Rúbrica</span></div>
+        <div class="tool-info">
+          <p class="desc">Pruebas, exámenes, rúbricas de evaluación y claves de respuesta. Con adaptaciones para inclusión.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📊 PRUEBA</span>"ROL: Evaluador educativo. CONTEXTO: [grado], [área], [tema], DBA: [código DBA]. TAREA: Diseña prueba de [período] con: 10 preguntas variadas (3 selección múltiple, 2 verdadero/falso, 2 completar, 2 respuesta corta, 1 dibujo), incluye clave de respuestas y rúbrica de 3 criterios × 4 niveles. FORMATO: Imprimible, letra grande, pictogramas en instrucciones. RESTRICCIONES: Adaptada a [grado]. Incluye versión para estudiante con barreras de lectoescritura."</div>
+            <div class="mini-box"><span class="tag">📋 RÚBRICA</span>"ROL: Especialista en evaluación formativa. TAREA: Crea rúbrica analítica para evaluar [producto: texto escrito / exposición oral / trabajo en grupo / experimento] en [grado]. 4 criterios con descriptores específicos para 4 niveles (inicial, básico, alto, superior). Incluye versión de autoevaluación para el estudiante con lenguaje simplificado y caritas."</div>
+            <div class="mini-box"><span class="tag">🔍 DIAGNÓSTICA</span>"ROL: Docente evaluador. TAREA: Diseña prueba diagnóstica de inicio de año para [grado], área [área]. 8 preguntas que evalúen conocimientos previos esenciales. Formato: 3 ejercicios prácticos + 3 preguntas abiertas + 2 de percepción ('¿qué te gusta de [área]?', '¿qué se te dificulta?'). Incluye guía de interpretación de resultados."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. CANCIÓN EDUCATIVA -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🎵</span><h4>Canción Educativa</h4><span class="free">+ Música</span></div>
+        <div class="tool-info">
+          <p class="desc">Letras de canciones con ritmos colombianos para enseñar cualquier tema. Con guía para llevar a Suno AI.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">🎵 CANCIÓN</span>"ROL: Compositor de canciones infantiles educativas. CONTEXTO: [grado], [área], [tema]. Colegio público colombiano. Se cantará en aula sin instrumentos. TAREA: Letra con: título pegajoso, estribillo de 4 versos (se repite 3 veces), 2 estrofas de 4 versos, cierre de 2 versos. Ritmo sugerido: [cumbia/vallenato/merengue/ronda]. Rima sencilla (AABB). Referencia a Colombia. Incluye indicaciones de movimiento (palmas, gestos). RESTRICCIONES: Vocabulario adecuado a [grado]. Duración máxima: 2 min. Que funcione a capela."</div>
+            <div class="mini-box"><span class="tag">🎤 SUNO AI</span>"Paso 1: Pega el prompt de CANCIÓN en ChatGPT/Claude para obtener la letra. Paso 2: Abre suno.ai, Modo Create, pega la letra. En 'Style of music' escribe: 'Colombian [ritmo], children educational, playful, kids voices, clapping, [tema]'. Paso 3: Genera 2 versiones y elige la mejor."</div>
+            <div class="mini-box"><span class="tag">🇨🇴 CULTURA</span>"Canción sobre [tema cultural colombiano: región, festividad, plato típico, leyenda] para [grado]. Incluye nombres de lugares, personajes y tradiciones. Ritmo tradicional de esa región. Que transmita orgullo e identidad. Ideal para izadas de bandera y actos cívicos."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. INFOGRAFÍA / CARTEL -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">🎨</span><h4>Infografía / Cartel</h4><span class="free">Canva</span></div>
+        <div class="tool-info">
+          <p class="desc">Infografías educativas, carteles para el aula, horarios visuales y material decorativo con contenido pedagógico.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">🎨 INFOGRAFÍA</span>"ROL: Diseñador de infografías educativas para primaria. CONTEXTO: [grado], [área], [tema]. TAREA: Describe infografía con: título llamativo, 4-5 bloques de contenido (cada uno: ícono + máximo 15 palabras), 1 dato curioso, 3 palabras clave destacadas. FORMATO: Vertical, colores vibrantes (máx 4), fondo blanco, letra grande (mín 18pt). Incluye versión en texto plano para estudiante con discapacidad visual."</div>
+            <div class="mini-box"><span class="tag">🖼️ CARTEL AULA</span>"ROL: Diseñador de material para salón de clase. TAREA: Cartel '[título]' para [grado] con: 5 elementos visuales (ícono grande + frase de máximo 5 palabras cada uno), colores pastel, tipografía redondeada, espacio para nombre del curso. Tamaño: 50×70 cm. Incluye versión en blanco y negro para fotocopiar."</div>
+            <div class="mini-box"><span class="tag">📅 HORARIO</span>"ROL: Diseñador de material visual infantil. TAREA: Horario de clases para [grado] con: tabla de 5 días × 6 franjas horarias, cada materia con ícono grande y color distintivo, nombre del curso y año escolar. Formato: apaisado, tamaño carta, imprimible."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. PRESENTACIÓN -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📊</span><h4>Presentación</h4><span class="free">Gamma/PPT</span></div>
+        <div class="tool-info">
+          <p class="desc">Presentaciones para clase, reuniones de padres y proyectos. Con notas del orador incluidas.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📊 CLASE</span>"ROL: Diseñador de presentaciones educativas para primaria. CONTEXTO: [grado], [área], [tema]. TAREA: Guion para 7 diapositivas: (1) portada, (2) pregunta generadora, (3-4-5) tres ideas clave (máx 15 palabras c/u + imagen), (6) actividad interactiva, (7) cierre con compromiso. Para cada diapositiva: título, texto, imagen sugerida [entre corchetes] y nota para el docente. RESTRICCIONES: Una idea por slide. Incluye referente colombiano. Tono cálido."</div>
+            <div class="mini-box"><span class="tag">👨‍👩‍👧‍👦 PADRES</span>"ROL: Docente preparando reunión de padres. TAREA: Presentación de 6 diapositivas: (1) bienvenida y agenda, (2) 3 logros del grupo (datos positivos), (3) 2 áreas de mejora con estrategia, (4) 3 ideas para apoyar en casa (sin costo), (5) calendario, (6) gracias + preguntas. Tono: aliado, constructivo, esperanzador."</div>
+            <div class="mini-box"><span class="tag">🎓 PROYECTO</span>"ROL: Docente líder de proyecto. TAREA: Presentación de proyecto '[nombre]' para [grado]. 8 diapositivas: (1) título y equipo, (2) problema o necesidad, (3) objetivo, (4) actividades (cronograma visual), (5) recursos, (6) evidencias esperadas, (7) impacto en la comunidad, (8) cómo participar."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. GUÍA DE TRABAJO -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📚</span><h4>Guía de Trabajo</h4><span class="free">Autónomo</span></div>
+        <div class="tool-info">
+          <p class="desc">Guías de trabajo autónomo, guías de repaso y talleres para que los estudiantes trabajen a su ritmo.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📚 GUÍA</span>"ROL: Diseñador de guías de aprendizaje autónomo. CONTEXTO: [grado], [área], [tema]. TAREA: Guía de trabajo con: (1) vocabulario clave (5-8 palabras con definición), (2) EXPLORAR (actividad de activación), (3) PRACTICAR (2-3 ejercicios progresivos), (4) CREAR (actividad de aplicación), (5) EVALUAR (autoevaluación con criterios). FORMATO: Imprimible B/N. Instrucciones con pictogramas. RESTRICCIONES: Que un estudiante pueda completarla sin ayuda constante del docente."</div>
+            <div class="mini-box"><span class="tag">📝 REPASO</span>"ROL: Docente preparando material de refuerzo. TAREA: Guía de repaso para [grado], [área], período [X]. Incluye: resumen visual del tema (1 página), 5 ejercicios de práctica, 1 actividad lúdica (crucigrama, sopa de letras, laberinto), autoevaluación. Extensión: 3-4 páginas."</div>
+            <div class="mini-box"><span class="tag">🏠 TAREA</span>"ROL: Docente diseñando actividad para casa. TAREA: Actividad para hacer en familia sobre [tema]. 3 partes: (1) explicación breve para la familia (qué van a hacer y por qué), (2) actividad práctica con materiales del hogar, (3) registro para traer a clase (dibujo + 2 oraciones). Máximo 1 página."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. CUENTO / TEXTO -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📖</span><h4>Cuento / Texto</h4><span class="free">Lectura</span></div>
+        <div class="tool-info">
+          <p class="desc">Cuentos infantiles, textos expositivos, fábulas y lecturas con preguntas de comprensión.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📖 CUENTO</span>"ROL: Escritor de literatura infantil colombiana. CONTEXTO: [grado], tema: [tema]. TAREA: Escribe cuento de 4-5 párrafos con: personajes con nombres colombianos, escenario en [región], problema o conflicto, desenlace con enseñanza. Al final: 5 preguntas de comprensión (2 literales, 2 inferenciales, 1 crítica). FORMATO: Letra grande, párrafos cortos, ilustración sugerida para cada párrafo. RESTRICCIONES: Vocabulario adecuado a [grado]. Incluye valores: [respeto, solidaridad, cuidado del ambiente...]."</div>
+            <div class="mini-box"><span class="tag">📚 TEXTO EXPOSITIVO</span>"ROL: Divulgador científico infantil. TAREA: Texto expositivo sobre [tema] para [grado]. 4 párrafos: cada uno con una idea central + ejemplo + pregunta al lector. Incluye: 3 palabras de vocabulario científico con definición sencilla, recuadro '¿Sabías que...?' con 3 datos curiosos, tabla de resumen al final."</div>
+            <div class="mini-box"><span class="tag">🎭 OBRA TEATRO</span>"ROL: Dramaturgo escolar. TAREA: Mini obra de teatro para [grado] sobre [tema]. 3 escenas cortas, 4-5 personajes (narrador + personajes), diálogos sencillos de 2-3 líneas, 1 canción o rima insertada. Duración: 5-8 minutos. Incluye sugerencias de vestuario con materiales reciclados."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 10. INFORME / FORMATO -->
+      <div class="tool-card">
+        <div class="tool-top"><span class="emoji">📑</span><h4>Informe / Formato</h4><span class="free">Administrativo</span></div>
+        <div class="tool-info">
+          <p class="desc">Informes descriptivos, formatos de seguimiento, actas y documentos administrativos docentes.</p>
+          <div class="more-prompts">
+            <div class="label">📌 Prompts listos:</div>
+            <div class="mini-box"><span class="tag">📑 INFORME</span>"ROL: Docente redactando informes de desempeño. CONTEXTO: [grado], [área], período [X], [nombre del estudiante: usar iniciales]. TAREA: Informe descriptivo con: (1) fortalezas demostradas (2-3 con evidencia), (2) aspectos en proceso (1-2 con estrategia de apoyo), (3) recomendaciones para la familia (3 ideas prácticas), (4) compromisos para próximo período. RESTRICCIONES: Lenguaje constructivo, centrado en el estudiante. NO usar etiquetas negativas."</div>
+            <div class="mini-box"><span class="tag">📋 FORMATO</span>"ROL: Diseñador de formatos escolares. TAREA: Crea formato de [tipo: seguimiento académico / agenda de clase / registro de tareas / control de asistencia] para [grado]. Diseño: tabla con columnas necesarias, espacio para nombre del docente, fecha y observaciones. Tamaño carta, apaisado si es necesario. Imprimible en blanco y negro."</div>
+            <div class="mini-box"><span class="tag">📝 ACTA</span>"ROL: Secretario de reunión escolar. TAREA: Redacta acta de [tipo: reunión de padres / consejo de profesores / entrega de notas] con: fecha, asistentes, agenda, temas tratados (viñetas con acuerdos), compromisos (tabla: tarea | responsable | fecha límite), firma. Lenguaje formal pero claro."</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- ===== INSTITUCIONES VIEW ===== -->
 <section class="inst-view" id="inst-view">
@@ -1631,32 +1925,30 @@ REGLAS ADICIONALES:
         <h4>📝 Prompt — I.E. Alfonso López Pumarejo</h4>
         <button class="copy-btn" onclick="copyInstPrompt('alfonso')">📋 Copiar</button>
       </div>
-      <textarea class="prompt-textarea" id="prompt-alfonso" style="min-height:220px">Eres un asesor pedagógico experto en educación colombiana. Genera una planeación de clase para la I.E. Técnica Alfonso López Pumarejo (Turbaco, Bolívar).
+      <textarea class="prompt-textarea" id="prompt-alfonso" style="min-height:220px">ROL: Eres un asesor pedagógico especializado en el modelo Constructivista Cognitivo de la I.E. Técnica Alfonso López Pumarejo (Turbaco, Bolívar). Dominas las teorías de Piaget (desarrollo por etapas), Vygotsky (zona de desarrollo próximo) y Ausubel (aprendizaje significativo).
 
-MODELO PEDAGÓGICO: Pedagogía Humanística — Constructivista Cognitivo
-- Teoría Psicológica Genética de Jean Piaget (desarrollo por etapas)
-- Teoría Psicológica y Culturista de Lev Vygotsky (zona de desarrollo próximo)
-- Teoría del Aprendizaje Significativo de David Ausubel (organizadores previos)
+CONTEXTO INSTITUCIONAL:
+- IE pública, calendario A, jornada mañana y tarde
+- Modelo: Pedagogía Humanística — Constructivista Cognitivo
+- Formato de clase: Exploración (30 min) → Estructuración (50 min) → Práctica/Evaluación (40 min)
 
-FORMATO DE PLANEACIÓN (por clase):
-1. ENCABEZADO: Área, Grado, Docente, Periodo, Semana, Fecha, Institución
-2. PROPÓSITO DE APRENDIZAJE / DESEMPEÑO
-3. ORGANIZADOR PREVIO (activación de conocimientos previos — 5-10 min)
-
-MOMENTOS DE LA CLASE:
-- M1 EXPLORACIÓN (30 min): Activación de esquemas previos, motivación, presentación del tema
-- M2 ESTRUCTURACIÓN (50 min): Desarrollo del contenido, construcción guiada del conocimiento, interacción docente-estudiante
-- M3 PRÁCTICA / EVALUACIÓN (40 min): Aplicación, práctica autónoma o grupal, evaluación
-
-4. EVIDENCIAS DE APRENDIZAJE (entregable concreto)
-5. RECURSOS (lista de materiales)
-6. ATENCIÓN A LA DIVERSIDAD (adaptaciones PIAR, inclusión)
-7. REALIMENTACIÓN (espacio del estudiante)
+TAREA: Genera una planeación de clase para [grado], área [área], tema "[tema]" con esta estructura:
+1. ENCABEZADO (área, grado, docente, período, semana, fecha, IE, modelo pedagógico)
+2. PROPÓSITO DE APRENDIZAJE / DESEMPEÑO + 3 indicadores de logro
+3. ORGANIZADOR PREVIO (activación de conocimientos previos, 5-10 min, según Ausubel)
+4. M1 EXPLORACIÓN (30 min): actividad concreta + estrategia + recurso + adaptación DUA
+5. M2 ESTRUCTURACIÓN (50 min): desarrollo guiado del contenido con zona de desarrollo próximo (Vygotsky) + trabajo colaborativo/individual + recurso + adaptación DUA
+6. M3 PRÁCTICA / EVALUACIÓN (40 min): aplicación autónoma o grupal + instrumento de evaluación + adaptación DUA
+7. EVIDENCIAS DE APRENDIZAJE (entregable concreto)
+8. RECURSOS (lista específica de materiales, priorizando bajo costo)
+9. ATENCIÓN A LA DIVERSIDAD (adaptaciones para PIAR, inclusión de género y diversidad étnica)
+10. REALIMENTACIÓN (3 preguntas para el estudiante)
 
 REGLAS:
-- Adapta el vocabulario al grado
+- Adapta vocabulario al grado (lúdico para primaria, más formal para secundaria)
 - Incluye al menos 3 estrategias de aprendizaje activo
-- Usa organizadores previos (Ausubel) y zona de desarrollo próximo (Vygotsky)
+- Usa organizadores previos (Ausubel) y referencias a la zona de desarrollo próximo (Vygotsky)
+- Conecta los contenidos con el contexto de Turbaco y la región Caribe
 - Responde en español con lenguaje claro y profesional
 
 ¿En qué grado, área y tema quieres la planeación?</textarea>
@@ -1760,35 +2052,29 @@ REGLAS:
         <h4>📝 Prompt — I.E. Benedikta Zur Nieden</h4>
         <button class="copy-btn" onclick="copyInstPrompt('benedikta')">📋 Copiar</button>
       </div>
-      <textarea class="prompt-textarea" id="prompt-benedikta" style="min-height:220px">Eres un asesor pedagógico experto en educación colombiana. Genera una guía de aprendizaje para la I.E. Benedikta Zur Nieden (Itagüí, Antioquia).
+      <textarea class="prompt-textarea" id="prompt-benedikta" style="min-height:220px">ROL: Eres un asesor pedagógico especializado en el modelo Nueva Escuela de la I.E. Benedikta Zur Nieden (Itagüí, Antioquia). Conoces los principios de Paulo Freire, el aprendizaje colaborativo y la flexibilidad curricular contextualizada.
 
-MODELO PEDAGÓGICO: Nueva Escuela
-- Educación como práctica de libertad (Paulo Freire)
-- Aprendizaje contextualizado y significativo
-- Trabajo colaborativo como eje central
-- Formación integral: cognitivo, social, emocional, cultural
-- Flexibilidad curricular adaptada al contexto
+CONTEXTO INSTITUCIONAL:
+- IE pública, calendario A, jornada mañana y tarde
+- Modelo: Nueva Escuela (aprendizaje autónomo, trabajo colaborativo, participación comunitaria)
+- Formato: Guía de aprendizaje por período de 12 semanas, momentos A-B-C-D
 
-FORMATO DE GUÍA (periodo de 12 semanas):
-MOMENTO A (Semanas 1-3): Exploración e introducción del tema
-MOMENTO B (Semanas 4-8): Desarrollo y profundización
-MOMENTO C (Semanas 9-10): Síntesis y aplicación (actividades integradoras)
-MOMENTO D (Semanas 11-12): Evaluación y cierre (autoevaluación, coevaluación)
-
-ESTRUCTURA DE LA GUÍA:
-1. Referentes de Calidad (MEN, Estándares, ICFES)
-2. Recomendaciones para el estudiante
-3. Vocabulario del tema
-4. Indicadores de Logro
-5. Contenidos por momento (A, B, C, D)
-6. Actividades Integradoras (Momento C)
-7. Rúbricas de autoevaluación y coevaluación (Momento D)
-8. Glosario y Bibliografía
+TAREA: Genera una guía de aprendizaje para [grado], área [área], tema "[tema]" con esta estructura:
+1. REFERENTES DE CALIDAD (Lineamientos MEN, Estándares, Matriz ICFES, DBA aplicables)
+2. RECOMENDACIONES PARA EL ESTUDIANTE (instrucciones generales, énfasis en trabajo colaborativo y honestidad académica)
+3. VOCABULARIO (5-8 palabras clave con definiciones sencillas)
+4. INDICADORES DE LOGRO (mínimo 3, redactados en lenguaje claro para el estudiante)
+5. MOMENTO A — EXPLORACIÓN (semanas 1-3): actividades de activación de saberes previos, introducción a los contenidos, trabajo colaborativo e individual
+6. MOMENTO B — DESARROLLO (semanas 4-8): profundización con guías, actividades diferenciadas y recursos
+7. MOMENTO C — SÍNTESIS (semanas 9-10): 1-2 actividades integradoras donde el estudiante aplique todos los saberes
+8. MOMENTO D — EVALUACIÓN (semanas 11-12): rúbrica de autoevaluación, rúbrica de coevaluación y criterios de evaluación del docente
+9. GLOSARIO Y BIBLIOGRAFÍA
 
 REGLAS:
-- Adapta al contexto cultural y social del estudiante
-- Incluye actividades que promuevan la reflexión crítica
-- El trabajo colaborativo debe ser el eje central
+- El trabajo colaborativo debe ser el eje central de las actividades
+- Incluye actividades que promuevan la reflexión crítica del estudiante sobre su realidad
+- Adapta al contexto cultural y social de Itagüí y Antioquia
+- Las actividades deben fomentar la autonomía y la autogestión
 - Responde en español con lenguaje claro y profesional
 
 ¿En qué grado, área y tema quieres la guía?</textarea>
@@ -1875,32 +2161,37 @@ REGLAS:
         <h4>📝 Prompt — IED María Teresa Ortiz Nueva</h4>
         <button class="copy-btn" onclick="copyInstPrompt('maria_teresa')">📋 Copiar</button>
       </div>
-      <textarea class="prompt-textarea" id="prompt-maria_teresa" style="min-height:220px">Eres un asesor pedagógico experto en educación colombiana. Genera un planeador de clase trimestral para la IED María Teresa Ortiz Nueva (Madrid, Cundinamarca).
+      <textarea class="prompt-textarea" id="prompt-maria_teresa" style="min-height:220px">ROL: Eres un asesor pedagógico especializado en el modelo Constructivista con enfoque de Aprendizaje Significativo de la IED María Teresa Ortiz Nueva (Madrid, Cundinamarca). Dominas la teoría de David Ausubel y la planificación trimestral por semanas.
 
-MODELO PEDAGÓGICO: Constructivista — Aprendizaje Significativo de David Ausubel
-- Aprendizaje significativo por recepción
-- Organizadores previos como puente cognitivo
-- Principio de asimilación: la información nueva reorganiza los conocimientos existentes
-- Aprendizaje de representaciones, conceptos y proposiciones
-- Evaluación diagnóstica, formativa y final
+CONTEXTO INSTITUCIONAL:
+- IE pública, calendario A, jornada mañana y tarde
+- Modelo: Constructivista — Aprendizaje Significativo (Ausubel)
+- Formato: Planeador trimestral de 13 semanas con aprendizajes Conceptuales, Procedimentales y Actitudinales
 
-FORMATO DE PLANEADOR (trimestre de 13 semanas):
-| SEMANA | APRENDIZAJES (C/P/A) | DBA | INDICADOR DE DESEMPEÑO | EVIDENCIAS | ENTREGABLE |
+TAREA: Genera un planeador trimestral para el área de [área], grado [grado], [trimestre] trimestre con esta estructura:
+1. ENCABEZADO (área, asignatura, docente, sede, jornada, grado, trimestre, año)
+2. APRENDIZAJES: Conceptual (C), Procedimental (P), Actitudinal (A) + DBA correspondiente
+3. ORGANIZADOR PREVIO (para cada tema nuevo, según Ausubel)
+4. PLANEADOR SEMANAL (tabla con 13 semanas):
 
-ESTRUCTURA:
-1. ENCABEZADO: Área, Asignatura, Docente, Sede, Jornada, Grado, Trimestre
-2. APRENDIZAJES: Conceptual (C), Procedimental (P), Actitudinal (A), DBA
-3. ORGANIZADOR PREVIO (para cada tema nuevo)
-4. SEMANAS 1-13: Diagnóstico → DBA → Plan Lector → Profundización → Evaluación → Cierre
-5. INDICADORES DE DESEMPEÑO
-6. EVIDENCIAS DE APRENDIZAJE
-7. ATENCIÓN A LA DIVERSIDAD
+| SEMANA | CONTENIDO | INDICADOR DE DESEMPEÑO | EVIDENCIAS | ENTREGABLE |
+
+- Semana 1: Diagnóstico (evaluación diagnóstica inicial)
+- Semanas 2-5: Desarrollo del DBA (conceptual y procedimental)
+- Semanas 6-7: Plan Lector (comprensión lectora aplicada al área)
+- Semanas 8-11: Profundización y proyectos transversales
+- Semana 12: Proyecto de área / Evaluación trimestral
+- Semana 13: Cierre de notas / Autoevaluación del estudiante
+
+5. ATENCIÓN A LA DIVERSIDAD (adaptaciones para estudiantes con PIAR)
+6. OBSERVACIONES (espacio para notas del docente)
 
 REGLAS:
-- Cada tema incluye organizador previo (Ausubel)
-- Clasifica aprendizajes en Conceptual, Procedimental y Actitudinal
-- Incluye evidencias variadas: mapas conceptuales, exposiciones, talleres, proyectos
-- Evaluación diagnóstica, formativa y final
+- Cada tema nuevo debe incluir un organizador previo (Ausubel)
+- Clasifica TODOS los aprendizajes en Conceptual (C), Procedimental (P) y Actitudinal (A)
+- Incluye evidencias variadas: mapas conceptuales, exposiciones, talleres, proyectos, portafolios
+- Evaluación: diagnóstica, formativa y sumativa en los momentos indicados
+- Conecta los contenidos con el contexto de Madrid, Cundinamarca y la región andina
 - Responde en español con lenguaje claro y profesional
 
 ¿En qué área, grado y trimestre quieres el planeador?</textarea>
@@ -2074,6 +2365,8 @@ function showDashboard() {
   document.getElementById('tools-view').style.display = 'none';
   document.getElementById('modelo-view').classList.remove('active');
   document.getElementById('modelo-view').style.display = 'none';
+  const bancoView = document.getElementById('banco-view');
+  if (bancoView) { bancoView.style.display = 'none'; bancoView.classList.remove('active'); }
   // Hide institution view
   const instView = document.getElementById('inst-view');
   if (instView) { instView.style.display = 'none'; instView.classList.remove('active'); }
@@ -2082,7 +2375,22 @@ function showDashboard() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function showModelo() {
+function showBancoPrompts() {
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('tools-view').classList.remove('active');
+  document.getElementById('tools-view').style.display = 'none';
+  document.getElementById('modelo-view').classList.remove('active');
+  document.getElementById('modelo-view').style.display = 'none';
+  const bancoView = document.getElementById('banco-view');
+  if (bancoView) { bancoView.style.display = 'none'; bancoView.classList.remove('active'); }
+  const instView = document.getElementById('inst-view');
+  if (instView) { instView.style.display = 'none'; instView.classList.remove('active'); }
+  document.getElementById('banco-view').style.display = 'block';
+  document.getElementById('banco-view').classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function 
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('tools-view').style.display = 'none';
   const instView = document.getElementById('inst-view');
