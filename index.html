@@ -2394,9 +2394,11 @@ function showBancoPrompts() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-function 
+function showModelo() {
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('tools-view').style.display = 'none';
+  const bancoView = document.getElementById('banco-view');
+  if (bancoView) { bancoView.style.display = 'none'; bancoView.classList.remove('active'); }
   const instView = document.getElementById('inst-view');
   if (instView) { instView.style.display = 'none'; instView.classList.remove('active'); }
   document.getElementById('modelo-view').style.display = 'block';
